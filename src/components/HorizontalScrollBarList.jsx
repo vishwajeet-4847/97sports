@@ -8,7 +8,7 @@ const HorizontalScrollList = ({ setSearchBar }) => {
 
   return (
     <div className="w-full bg-red-600 relative ">
-      <div className="flex overflow-x-auto items-center whitespace-nowrap flex-nowrap scrollbar-hide w-full gap-3 ">
+      <div className="flex cursor-default overflow-x-auto items-center whitespace-nowrap flex-nowrap scrollbar-hide w-full gap-3 ">
         {/* aviator div  */}
         <div className=" h-8 min-w-fit whitespace-nowrap rounded-tr-lg rounded-tl-lg ml-2 bg-black p-2 mt-2  ">
           <div className="flex gap-1 h-full text-base font-bold items-center scale-animation">

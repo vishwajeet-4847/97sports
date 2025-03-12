@@ -14,7 +14,7 @@ const Modal = ({ isOpen, onClose, sections ,title}) => {
       
         {sections.length > 0 && sections.map((section, index) => (
           <div key={index} className="mb-4">
-            <h3 className="text-lg font-semibold text-black font-bold bg-neutral-300">{section.title}</h3>
+            <h3 className="text-lg  text-black font-bold bg-neutral-300">{section.title}</h3>
             {section.content.map((paragraph, i) => (
               <p key={i} className="text-black mt-2">{paragraph}</p>
             ))}

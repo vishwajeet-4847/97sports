@@ -46,7 +46,7 @@ const Footer = () => {
           }
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
-          className="mx-[10px] text-black text-[14px] text-center no-underline cursor-pointer "
+          className={`mx-[10px] text-black text-[14px] text-center no-underline cursor-pointer ${index>0 ? "before:content-['|'] before:mr-[5px]":""} `}
         >
           {section.title}
         </a>

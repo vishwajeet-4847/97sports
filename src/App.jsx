@@ -1,11 +1,12 @@
 
 
 import './App.css'
+import { Homescreen } from './screens/Homescreen'
 
 function App() {
   return (
     <>
-      <h1 className='text-amber-300'>hello </h1>
+      <Homescreen />
     </>
   )
 }

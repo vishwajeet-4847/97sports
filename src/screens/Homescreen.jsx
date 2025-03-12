@@ -12,16 +12,14 @@ import Footer from "../components/Footer";
 export const Homescreen = () => {
   const [searchBar, setSearchBar] = React.useState(false);
   return (
-    <div>
-      <Header />
+<div>
+     <Header />
 
-      <ImageCarousel
-        images={[
-          "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
-          "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
-        ]}
-      />
-      <HorizontalScrollList setSearchBar={setSearchBar} />
+        <ImageCarousel images={["https://97sports.in/api/users/images/slider-default-2025221103413148.jpg","https://97sports.in/api/users/images/slider-default-2025221103413148.jpg"]} />
+        <HorizontalScrollList items={["cricket" ,"volleybol"]} />
+       
+<Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
+<GridContainer>
 
       <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
         <GridContainer>

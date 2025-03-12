@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AgeVerificationModal from "./modals/AgeVerificationModal";
+import AgeVerificationModal from "../modals/AgeVerificationModal";
 
 const Header = () => {
     const [showSearch, setShowSearch] = useState(false);

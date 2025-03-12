@@ -1,21 +1,4 @@
 @import "tailwindcss";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
-@keyframes scaleBounce {
-  0% {
-    transform: scale(0.8);
-    color: red;
-  }
-  50% {
-    transform: scale(1.1);
-    color: yellow;
-  }
-  100% {
-    transform: scale(0.8);
-    color: red;
-  }
-}
 
-.scale-animation {
-  animation: scaleBounce 1s infinite alternate ease-in-out;
-}

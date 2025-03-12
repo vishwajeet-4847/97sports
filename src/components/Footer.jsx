@@ -1,48 +1,80 @@
+import { useState } from "react";
+import Modal from "./Modal"; // Import your modal component
+import androidapkpng from "../assets/androidapk.png";
+import knowYourCustomerPolicy from "../details/knowyourcustomerpolicy";
+import privacyPolicy from "../details/privacypolicy";
+
+
 const Footer = () => {
-  return (
-    <div className="inner-footer bg-white py-6">
-      {/* Support Links */}
-      <div class="flex flex-wrap items-center space-y-2 text-black">
-  <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="hover:underline">Privacy Policy</a>
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState([]);
+  const [modalContent, setModalContent] = useState([]);
+ 
+
+  const sections = [
+  { title: "Privacy Policy",content:privacyPolicy},
+   { title:"Rules and Regulations",content:[]},
+    {title:"KYC", content: knowYourCustomerPolicy}, 
+    { title: "Terms and Conditions",content:[]},
+    { title:  "Responsible Gambling",content:[]},
  
   
-  <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="hover:underline flex items-center">
-    Rules and Regulations <span class="ml-1">|</span>
-  </a>
+  ];
 
-  <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="hover:underline flex items-center">
-    KYC <span class="ml-1">|</span>
-  </a>
+  const openModal = () => {
+
+  
+    setIsOpen(true);
+  };
+
+  return (
+    <div className="w-full bg-transparent text-transparent h-[150px] py-6 mb-[100px] lg:mb-0 ">
+  <div className="m-[5px] pt-[6px]">
+    {/* Support Links */}
+    <div className="block text-[var(--footer-text-color)] text-[13px] leading-[22px] mb-[10px] mt-[10px] text-center">
+    <dl className="inline-block mr-[10px] mb-[6px]">
+      {
+        sections.map((section, index) => (
+          <a
+          key={index}
+          onClick={
+            () => {
+              setModalTitle(section.title);
+              setModalContent(section.content);
+              openModal();
+            }
+          }
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          className="mx-[10px] text-black text-[14px] text-center no-underline cursor-pointer "
+        >
+          {section.title}
+        </a>
+        ))
+      }
+    
  
-
-  <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="hover:underline flex items-center">
-    Terms and Conditions <span class="ml-1">|</span>
-  </a>
- 
-
-  <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="hover:underline flex items-center">
-    Responsible Gambling <span class="ml-1">|</span>
-  </a>
+      </dl>
+  </div>
+{/* Android App Download */}
+    <div className="flex justify-center lg:hidden">
+      <a target="_blank" >
+        <img alt="Download Android App" src={androidapkpng} className="w-[41.33333vw] h-auto rounded-[8px] bg-contain" />
+      </a>
+    </div>
+  </div>
+ {
+  isOpen && (
+    <Modal
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      title={modalTitle}
+      sections={modalContent}
+    />
+  )
+ }
 </div>
 
-
-      {/* Extra Content (Android App Download) */}
-      <div className="extra-wrap flex justify-center mt-4">
-        <div className="appdl-link-android">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center bg-gradient-to-b from-gray-900 to-gray-700 px-6 py-3 rounded-lg shadow-md hover:opacity-90 transition"
-          >
-            <img
-              src="./../../../assets/androidapk.png"
-              alt="Download Android App"
-              className="w-40 h-auto"
-            />
-          </a>
-        </div>
-      </div>
-    </div>
   );
 };
 

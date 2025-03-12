@@ -28,7 +28,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="w-full bg-transparent text-transparent py-6 mb-[70px] lg:mb-0 ">
+    <div className="w-full bg-transparent text-transparent h-[150px] py-6 mb-[100px] lg:mb-0 ">
   <div className="m-[5px] pt-[6px]">
     {/* Support Links */}
     <div className="block text-[var(--footer-text-color)] text-[13px] leading-[22px] mb-[10px] mt-[10px] text-center">

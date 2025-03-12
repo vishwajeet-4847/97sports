@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 
 export const Homescreen = () => {
   return (
-    <div>
+    <div className='pb-[14vw]'>
         <Header />
 
         <ImageCarousel images={["https://97sports.in/api/users/images/slider-default-2025221103413148.jpg","https://97sports.in/api/users/images/slider-default-2025221103413148.jpg"]} />

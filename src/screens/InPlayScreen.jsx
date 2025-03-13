@@ -8,6 +8,7 @@ import GridContainer from '../components/GridContainer'
 import CasinoCard from '../components/CasinoCard'
 import HorizontalScrollList from '../components/HorizontalScrollBarList'
 import BottomNavigationBar from '../components/BottomNavigationBar'
+import ListItem from '../components/ListItem'
 
 const secondMenu =
 [
@@ -26,6 +27,7 @@ const InPlayScreen = () => {
     <ButtonGroup />
     <GroupBox title={"cricket"} market={[dummyMarketData[0]]} />
     <HorizontalScrollList menuItem={secondMenu}/>
+    <ListItem />
     <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
         <GridContainer>
           <CasinoCard

@@ -40,7 +40,7 @@ export const Homescreen = () => {
   return (
     <div>
      {searchBar && <SearchBar setSearchBar={setSearchBar} /> }
-      <Header />
+      
       <ImageCarousel
         images={[
           "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
@@ -69,7 +69,7 @@ export const Homescreen = () => {
       </Section>
 
       <Footer />
-      <Navigation />
+     
     </div>
   );
 };

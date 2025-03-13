@@ -2,18 +2,19 @@
 
 import React , { useState } from 'react'
 import './App.css'
-import { Homescreen } from './screens/Homescreen'
-import InPlayScreen from './screens/InPlayScreen'
+import Header from './components/header/header'
+import BottomNavigationBar from './components/BottomNavigationBar'
+import { Outlet } from 'react-router'
+
 
 function App() {
   const [LoggedIn, setLoggedIn] = useState (false)
   return (
     <>
-     {/* <Header />
+     <Header />
      <Outlet />
-      <BottomNavigationBar /> */}
-      {/* <Homescreen /> */}
-      <InPlayScreen />
+      <BottomNavigationBar />
+    
     </>
   )
 }

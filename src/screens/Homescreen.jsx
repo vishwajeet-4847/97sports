@@ -9,6 +9,8 @@ import GridContainer from "../components/GridContainer";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import cricket from "/cricket.png";
+import DataTable from "../components/DataTable";
+import dummyMarketData from "../details/dummymarket";
 
 const defaultMenu = [
     { name: "Cricket", icon: cricket },
@@ -46,7 +48,7 @@ export const Homescreen = () => {
         ]}
       />
       <HorizontalScrollList setSearchBar={setSearchBar} showSearchIcon={true} showAviator={true} menuItem={defaultMenu}/>
-
+        <DataTable  marketData={dummyMarketData}/>
       <HorizontalScrollList menuItem={secondMenu}/>
 
       <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">

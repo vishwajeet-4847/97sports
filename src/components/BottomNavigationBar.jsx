@@ -24,7 +24,7 @@ const BottomNavigationBar = () => {
 
   return (
  
-    <nav className="fixed bottom-0 left-0 w-full bg-gradient-to-b from-[#243a48] via-[#243a48] to-[#172732] text-white z-10">
+    <nav className="fixed bottom-0 left-0 w-full bg-gradient-to-b from-[#243a48] via-[#243a48] to-[#172732] text-white z-10 md:hidden">
     <ul className="flex p-0 mb-0 list-none text-white box-border">
       {Menus.map((menu, index) => (
         <li key={index} className="flex-1 text-center py-2"> {/* Adjusted padding */}

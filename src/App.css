@@ -16,3 +16,28 @@
 .scale-animation {
   animation: scaleBounce 1s infinite alternate ease-in-out;
 }
+
+
+
+/* color change animation */
+@keyframes colorChange {
+  0% {
+    transform: scale(1);
+    color: #008000;
+  }
+  
+  
+  50% {
+    transform: scale(1.1);
+    color: #ff0000;
+  }
+  
+  100% {
+    transform: scale(1);
+    color:#008000;
+  }
+}
+.color-change-animation {
+  animation: colorChange 1s infinite  ease-in-out;
+}
+

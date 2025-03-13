@@ -1,5 +1,5 @@
 import React, {  useRef, useState } from "react";
-import cricket from "/cricket.png";
+
 import aviator from "/aviator.png";
 import search from "/search.png";
 
@@ -60,7 +60,7 @@ const HorizontalScrollList = ({ setSearchBar , menuItem = [] , showSearchIcon , 
   
   
   return (
-    <div className="w-full bg-gradient-to-b from-[#f60105] to-[#801011] relative ">
+    <div className="w-full bg-gradient-to-b from-[#f60105] to-[#801011] relative select-none">
       <div
         className={`flex cursor-default overflow-x-auto items-center whitespace-nowrap flex-nowrap custom-scrollbar  w-full gap-3 ${showSearchIcon && "pr-[62px]"} `}
         ref={scrollRef}

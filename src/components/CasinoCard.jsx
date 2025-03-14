@@ -6,7 +6,7 @@ const CasinoCard = ({ game }) => {
 
 
   
-
+console.log(game)
   return (
     <div
       onClick={() => navigate(`/casino/${game.gmid}`, { state: game })}

@@ -3,12 +3,12 @@ import ButtonGroup from '../components/ButtonGroup'
 
 import dummyMarketData from '../details/dummymarket'
 import GroupBox from '../components/GroupBox'
-import Section from '../components/Section'
-import GridContainer from '../components/GridContainer'
-import CasinoCard from '../components/CasinoCard'
+
 import HorizontalScrollList from '../components/HorizontalScrollBarList'
 import BottomNavigationBar from '../components/BottomNavigationBar'
 import ListItem from '../components/ListItem'
+import CasinoBox from '../components/CasinoBox'
+
 
 const secondMenu =
 [
@@ -22,28 +22,14 @@ const secondMenu =
   { id: "sportsBar7", name: "PLATINGAMES" },
 ]
 const InPlayScreen = () => {
+  
   return (
-    <div className='pb-[100px]'>
+    <div>
     <ButtonGroup />
     <GroupBox title={"cricket"} market={[dummyMarketData[0]]} />
     <HorizontalScrollList menuItem={secondMenu}/>
     <ListItem />
-    <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
-        <GridContainer>
-          <CasinoCard
-            imageSrc="https://97sports.in/api/users/images/Point Teen Patti-min.png"
-            title="POINT TEEN PATTI"
-          />
-          <CasinoCard
-            imageSrc="https://97sports.in/api/users/images/Point Teen Patti-min.png"
-            title="POINT TEEN PATTI"
-          />
-          <CasinoCard
-            imageSrc="https://97sports.in/api/users/images/Point Teen Patti-min.png"
-            title="POINT TEEN PATTI"
-          />
-        </GridContainer>
-      </Section>
+      <CasinoBox />
       <BottomNavigationBar />
     </div>
   )

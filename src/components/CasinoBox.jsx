@@ -11,9 +11,9 @@ const CasinoBox = () => {
   return (
       <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
           <GridContainer>
-              {allCasinoGames.map((game) => (
+              {allCasinoGames.map((game,index) => (
                   <CasinoCard
-                      key={game.eid}
+                      key={`${game.gid}-${index}`}
               
                       
                       game={game}

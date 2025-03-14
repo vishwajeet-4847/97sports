@@ -11,15 +11,16 @@ const CasinoBox = () => {
   return (
       <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
           <GridContainer>
-              {allCasinoGames.map((game,index) => (
-                  <CasinoCard
-                      key={`${game.gid}-${index}`}
-              
-                      
-                      game={game}
-                  />
-              ))}
-          </GridContainer>
+  {allCasinoGames.length > 0 ? (
+    allCasinoGames.map((game, index) => (
+      <CasinoCard key={`${game.gid}-${index}`} game={game} />
+    ))
+  ) : (
+    <div style={{ color: "white", textAlign: "center", padding: "20px" }}>
+      No games available to play.
+    </div>
+  )}
+</GridContainer>
       </Section>
   );
 };

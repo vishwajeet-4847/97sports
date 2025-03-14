@@ -1,12 +1,13 @@
 import React from 'react'
 import TitleBar from './TitleBar'
-import DataTable from './DataTable'
+
+import MatchList from './MatchList'
 
 const GroupBox = ({title , market}) => {
   return (
     <div>
         <TitleBar title={title} />
-        <DataTable marketData={market} />
+        <MatchList marketData={market} />
     </div>
   )
 }

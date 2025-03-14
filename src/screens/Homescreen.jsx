@@ -6,7 +6,7 @@ import HorizontalScrollList from "../components/HorizontalScrollbar/HorizontalSc
 import Footer from "../components/Footer";
 import SearchBar from "../components/search/SearchBar";
 
-import DataTable from "../components/DataTable";
+import MatchList from "../components/MatchList";
 import dummyMarketData from "../details/dummymarket";
 import CasinoBox from "../components/casino/CasinoBox";
 import { SportsContext } from "../services/allsports/sports.context";
@@ -27,6 +27,7 @@ import { CasinoContext } from "../services/casino/casino.context";
   
 export const Homescreen = () => {
   const [searchBar, setSearchBar] = useState(false);
+  
   const { allCasinoGames } = useContext(CasinoContext);
   
   const { allSports } = useContext(SportsContext);
@@ -47,7 +48,7 @@ export const Homescreen = () => {
         ]}
       />
       <HorizontalScrollList setSearchBar={setSearchBar} showSearchIcon={true} showAviator={true} menuItem={allSports}/>
-        <DataTable  marketData={dummyMarketData}/>
+        <MatchList  marketData={dummyMarketData}/>
       <HorizontalScrollList menuItem={secondMenu}/>
 
       <CasinoBox />

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-const DataTable = ({ marketData, isHome = false }) => {
+const MatchList = ({ marketData, isHome = false }) => {
   const navigate = useNavigate();
 
   return (
@@ -115,4 +115,4 @@ const DataTable = ({ marketData, isHome = false }) => {
   );
 };
 
-export default DataTable;
+export default MatchList;

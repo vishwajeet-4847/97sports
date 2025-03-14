@@ -1,16 +1,15 @@
 import React from 'react';
 
-const LiveStreaming = ({ url, width = '100%', height = '500px', className = '' }) => {
+const LiveStreaming = ({ url }) => {
   return (
-    <div className={`w-full ${className}`}>
-      <iframe
-        src={url}
-        width={width}
-        height={height}
-        allowFullScreen
-        className="w-full h-full border-none"
-      ></iframe>
-    </div>
+    <div className="relative w-full h-full overflow-hidden">
+    <iframe
+      src={url}
+      allowFullScreen
+      className="absolute top-0 left-0 w-full h-full border-none custom-scrollbar"
+      style={{ overflow: "hidden" , objectFit:"contain" }}
+    ></iframe>
+  </div>
   );
 };
 

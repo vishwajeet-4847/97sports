@@ -3,10 +3,12 @@ import { useLocation, useParams } from "react-router";
 import LiveStreaming from "../components/LiveStreaming";
 
 export const EventDetails = () => {
+  
   // Game data
-  const { gmid } = useParams();
+  const { id:gmid } = useParams();
   const location = useLocation();
   const game = location.state;
+console.log(gmid);
 
   const [timeRemaining, setTimeRemaining] = useState(37);
   const [suspended, setSuspended] = useState(false);

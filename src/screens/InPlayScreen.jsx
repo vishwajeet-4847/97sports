@@ -28,7 +28,7 @@ const InPlayScreen = () => {
     <ButtonGroup />
     <GroupBox title={"cricket"} market={[dummyMarketData[0]]} />
     <HorizontalScrollList menuItem={secondMenu}/>
-    <ListItem />
+    <ListItem item={"Cricket"} classname={"text-[#2789ce] font-semibold text-[4vw] "}  />
       <CasinoBox />
       <BottomNavigationBar />
     </div>

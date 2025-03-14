@@ -1,6 +1,7 @@
 import { FaExchangeAlt } from 'react-icons/fa';
 import { FaChevronRight } from 'react-icons/fa';
 import { FaSignOutAlt } from 'react-icons/fa';
+import ListItem from '../../ListItem';
 
 const MenuList = () => {
     const menuItems = [
@@ -15,12 +16,9 @@ const MenuList = () => {
     ];
   
     return (
-      <div className="bg-white shadow-md rounded-md overflow-hidden">
+      <div className="bg-white shadow-md rounded-md overflow-hidden mb-[50px] pb-[60px]">
         {menuItems.map((item, index) => (
-            <div key={index} className="flex justify-between items-center px-4 py-3 border-b border-gray-300 cursor-pointer hover:bg-gray-100">
-            <span className="text-blue-700 font-semibold">{item}</span>
-            <FaChevronRight className="text-gray-600" />
-          </div>
+           <ListItem item={item} key={index} classname={"text-blue-700 font-semibold"}/>
         //   <MenuItem key={index} title={item} />
         ))}
         <button className="w-full bg-red-600 text-white py-2 text-lg font-bold flex items-center justify-center space-x-2 shadow-md hover:bg-red-700">

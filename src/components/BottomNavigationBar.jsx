@@ -3,11 +3,11 @@
 
 import React from "react";
 import { NavLink } from "react-router";
-import  HomeIcon  from "./Home";
+import  HomeIcon  from "./svg/Home";
 
-import SportsIcon  from "./Sports";
-import  AccountIcon  from "./Account";
-import InPlayIcon from "./InPlay";
+import SportsIcon  from "./svg/Sports";
+import  AccountIcon  from "./svg/Account";
+import InPlayIcon from "./svg/InPlay";
 import ChipRotate from "../assets/ChipRotate.gif";
 
 

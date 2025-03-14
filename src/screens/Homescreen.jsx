@@ -1,27 +1,17 @@
-import React, { useState } from "react";
-import Header from "../components/header/header";
+import React, { useContext, useState } from "react";
+
 import ImageCarousel from "../components/ImageCarosouel";
-import HorizontalScrollList from "../components/HorizontalScrollBarList";
-import CasinoCard from "../components/CasinoCard";
-import Navigation from "../components/BottomNavigationBar";
-import Section from "../components/Section";
-import GridContainer from "../components/GridContainer";
+import HorizontalScrollList from "../components/HorizontalScrollbar/HorizontalScrollBarList";
+
 import Footer from "../components/Footer";
-import SearchBar from "../components/SearchBar";
-import cricket from "/cricket.png";
+import SearchBar from "../components/search/SearchBar";
+
 import DataTable from "../components/DataTable";
 import dummyMarketData from "../details/dummymarket";
-import CasinoBox from "../components/CasinoBox";
+import CasinoBox from "../components/casino/CasinoBox";
+import { SportsContext } from "../services/allsports/sports.context";
+import { CasinoContext } from "../services/casino/casino.context";
 
-const defaultMenu = [
-    { name: "Cricket", icon: cricket },
-    { name: "Football", icon: cricket },
-    { name: "Basketball", icon: cricket },
-    { name: "Tennis", icon: cricket },
-    { name: "Baseball", icon: cricket },
-    { name: "Hockey", icon: cricket },
-    { name: "Golf", icon: cricket },
-  ];
 
   const secondMenu =
     [
@@ -37,6 +27,14 @@ const defaultMenu = [
   
 export const Homescreen = () => {
   const [searchBar, setSearchBar] = useState(false);
+  const { allCasinoGames } = useContext(CasinoContext);
+  
+  const { allSports } = useContext(SportsContext);
+  console.log(allCasinoGames);
+  
+ 
+  
+  
   
   return (
     <div>
@@ -48,7 +46,7 @@ export const Homescreen = () => {
           "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
         ]}
       />
-      <HorizontalScrollList setSearchBar={setSearchBar} showSearchIcon={true} showAviator={true} menuItem={defaultMenu}/>
+      <HorizontalScrollList setSearchBar={setSearchBar} showSearchIcon={true} showAviator={true} menuItem={allSports}/>
         <DataTable  marketData={dummyMarketData}/>
       <HorizontalScrollList menuItem={secondMenu}/>
 

@@ -4,7 +4,7 @@ import axios from "axios";
 export const getAllCasinoGame = async () => {
     try {
         const response = await axios.get("https://titan97.live/get-casinotable");
-        console.log("helo");
+       
         
         return response.data; 
     } catch (error) {

@@ -11,10 +11,12 @@ import { Homescreen } from "./screens/Homescreen.jsx";
 import EndedGameDetailsScreen from "./screens/EndedGameDetailsScreen.jsx";
 import { EventDetails } from "./screens/EventDetails.jsx";
 import CasinoProvider from "./services/casino/casino.context.jsx";
+import SportsProvider from "./services/allsports/sports.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* <AuthProvider> */}
+    <SportsProvider >
     <CasinoProvider>
     <Router>
       <Routes>
@@ -31,6 +33,7 @@ createRoot(document.getElementById("root")).render(
       </Routes>
     </Router>
     </CasinoProvider>
+    </SportsProvider>
     {/* </AuthProvider> */}
   </StrictMode>
 );

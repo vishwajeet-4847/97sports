@@ -13,14 +13,23 @@ const SearchBar = ({ setSearchBar }) => {
       }
     };
 
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setSearchBar(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [setSearchBar]);
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center p-4">
+    <div className="fixed  inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div
         ref={searchRef}
         className="w-full max-w-md bg-white rounded-md shadow-lg p-2 flex items-center border border-gray-300"
@@ -37,7 +46,7 @@ const SearchBar = ({ setSearchBar }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        {/* Clear (X) Button - Only shows if input is not empty */}
+        {/* Clear (X) Button */}
         {searchQuery && (
           <button
             className="text-gray-500 hover:text-red-500 p-1"

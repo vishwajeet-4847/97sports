@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import Section from './Section'
-import GridContainer from './GridContainer'
+import Section from '../Section'
+import GridContainer from '../GridContainer'
 import CasinoCard from './CasinoCard'
-import { CasinoContext } from '../services/casino/casino.context'
+import { CasinoContext } from '../../services/casino/casino.context'
 
 
 const CasinoBox = () => {

@@ -4,10 +4,10 @@ import ButtonGroup from '../components/ButtonGroup'
 import dummyMarketData from '../details/dummymarket'
 import GroupBox from '../components/GroupBox'
 
-import HorizontalScrollList from '../components/HorizontalScrollBarList'
+import HorizontalScrollList from '../components/HorizontalScrollbar/HorizontalScrollBarList'
 import BottomNavigationBar from '../components/BottomNavigationBar'
 import ListItem from '../components/ListItem'
-import CasinoBox from '../components/CasinoBox'
+import CasinoBox from '../components/casino/CasinoBox'
 
 
 const secondMenu =

@@ -23,7 +23,7 @@ const secondMenu =
 ]
 const InPlayScreen = () => {
   return (
-    <>
+    <div className='pb-[100px]'>
     <ButtonGroup />
     <GroupBox title={"cricket"} market={[dummyMarketData[0]]} />
     <HorizontalScrollList menuItem={secondMenu}/>
@@ -45,7 +45,7 @@ const InPlayScreen = () => {
         </GridContainer>
       </Section>
       <BottomNavigationBar />
-    </>
+    </div>
   )
 }
 

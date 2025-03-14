@@ -1,9 +1,17 @@
 import React from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTv, faBroadcastTower } from "@fortawesome/free-solid-svg-icons";
 
-const TitleBar = ({title , background="bg-gradient-to-t from-[#14213D] to-[#315195]" , fontSize="" , lineHieght="" }) => {
+const TitleBar = ({title , background="bg-gradient-to-t from-[#14213D] to-[#315195]" , fontSize="" , lineHieght=""  , stream=false}) => {
   return (
-    <div>
-        <h3 className={`${background } ${fontSize} ${lineHieght} text-[#fff] text-[14px] leading-[30px] font-bold pl-[10px] m-0 text-center cursor-pointer`}>{title}</h3>
+    <div className={`${background } flex `}>
+        <h3 className={` ${fontSize} ${lineHieght} text-[#fff] text-[14px] w-[80%] leading-[30px] font-bold pl-[10px] m-0 text-center cursor-pointer`}>{title}</h3>
+        {stream && (
+        <span className={`${fontSize} w-[10%]`}>
+          <FontAwesomeIcon icon={faTv} className="text-white ml-[5px]" />
+        </span>
+      )}
+        
     </div>
   )
 }

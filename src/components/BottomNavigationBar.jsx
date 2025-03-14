@@ -13,11 +13,11 @@ import ChipRotate from "../assets/ChipRotate.gif";
 
 const BottomNavigationBar = () => {
   const Menus = [
-    { name: "Home", icon: <HomeIcon />},
-    { name: "In-play", icon: <InPlayIcon /> },
-    { name: "Sports", icon: <SportsIcon /> }, // Default Active (Middle One)
-    { name: "Casino", icon: "img" },
-    { name: "Account", icon: <AccountIcon /> },
+    { name: "Home",route:"/", icon: <HomeIcon />},
+    { name: "In-play",route:'/in-play', icon: <InPlayIcon /> },
+    { name: "Sports",route:'/sports' , icon: <SportsIcon /> }, // Default Active (Middle One)
+    { name: "Casino",route:'/Casino' , icon: "img" },
+    { name: "Account",route:'/account' , icon: <AccountIcon /> },
   ];
 
 
@@ -29,7 +29,7 @@ const BottomNavigationBar = () => {
       {Menus.map((menu, index) => (
         <li key={index} className="flex-1 text-center py-2"> {/* Adjusted padding */}
           <NavLink
-            to={`/${menu.name.toLowerCase()}`}
+            to={`${menu.route}`}
             className={({ isActive }) =>
               `relative flex flex-col items-center justify-center w-[20vw] h-[14vw] 
               box-border text-ellipsis whitespace-nowrap text-[3.2vw] text-center 

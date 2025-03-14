@@ -8,24 +8,29 @@ import InPlayScreen from "./screens/InPlayScreen.jsx";
 import SettingHeader from "./components/Roshan/Profile/SettingHeader.jsx";
 import ExchangeHeader from "./components/Roshan/Profile/ExchangeHeader.jsx";
 import { Homescreen } from "./screens/Homescreen.jsx";
-import GameDetailsScreen from "./screens/GameDetailsScreen.jsx";
+import EndedGameDetailsScreen from "./screens/EndedGameDetailsScreen.jsx";
 import { EventDetails } from "./screens/EventDetails.jsx";
+import CasinoProvider from "./services/casino.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* <AuthProvider> */}
+    <CasinoProvider>
     <Router>
       <Routes>
+       
         <Route path="/" element={<App />}>
-          <Route path="/home" element={<Homescreen />} />
+          <Route path="/" element={<Homescreen />} />
           <Route path="/settings" element={<SettingHeader />} />
           <Route path="/account" element={<ExchangeHeader />} />
           <Route path="/in-play" element={<InPlayScreen />} />
-          <Route path="/game" element={<GameDetailsScreen />} />
-          <Route path="/casion/:id" element={<EventDetails />} />
+          <Route path="/game" element={<EndedGameDetailsScreen />} />
+          <Route path="/casino/:id" element={<EventDetails />} />
         </Route>
+     
       </Routes>
     </Router>
+    </CasinoProvider>
     {/* </AuthProvider> */}
   </StrictMode>
 );

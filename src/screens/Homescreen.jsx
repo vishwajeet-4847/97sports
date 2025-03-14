@@ -11,6 +11,7 @@ import SearchBar from "../components/SearchBar";
 import cricket from "/cricket.png";
 import DataTable from "../components/DataTable";
 import dummyMarketData from "../details/dummymarket";
+import CasinoBox from "../components/CasinoBox";
 
 const defaultMenu = [
     { name: "Cricket", icon: cricket },
@@ -51,22 +52,7 @@ export const Homescreen = () => {
         <DataTable  marketData={dummyMarketData}/>
       <HorizontalScrollList menuItem={secondMenu}/>
 
-      <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
-        <GridContainer>
-          <CasinoCard
-            imageSrc="https://97sports.in/api/users/images/Point Teen Patti-min.png"
-            title="POINT TEEN PATTI"
-          />
-          <CasinoCard
-            imageSrc="https://97sports.in/api/users/images/Point Teen Patti-min.png"
-            title="POINT TEEN PATTI"
-          />
-          <CasinoCard
-            imageSrc="https://97sports.in/api/users/images/Point Teen Patti-min.png"
-            title="POINT TEEN PATTI"
-          />
-        </GridContainer>
-      </Section>
+      <CasinoBox />
 
       <Footer />
      

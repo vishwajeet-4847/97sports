@@ -1,19 +1,59 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useEffect, useState, useContext, useRef } from "react";
+import { useParams, useLocation } from "react-router";
+import { CasinoContext } from "../services/casino/casino.context";
 import LiveStreaming from "../components/LiveStreaming";
 
 export const EventDetails = () => {
-  
-  // Game data
-  const { id:gmid } = useParams();
+  const { id: gmid } = useParams();
   const location = useLocation();
-  const game = location.state;
-console.log(gmid);
+  const { getCasinoById, loading } = useContext(CasinoContext);
 
+  const [game, setGame] = useState(() => location.state || null);
+  const isFetching = useRef(false);
+
+  // Fetch game details if not available in state
+  useEffect(() => {
+    if (!game && !loading) {
+      fetchGameDetails(gmid);
+    }
+  }, [gmid, game, loading]); // Wait until games are loaded
+
+  const fetchGameDetails = (gameId) => {
+    if (isFetching.current) return;
+    isFetching.current = true;
+
+    const fetchedGame = getCasinoById(gameId);
+    if (fetchedGame) {
+      setGame(fetchedGame);
+    } else {
+      console.error("Game not found!");
+    }
+
+    isFetching.current = false;
+  };
+
+
+  // Timer state
   const [timeRemaining, setTimeRemaining] = useState(37);
   const [suspended, setSuspended] = useState(false);
 
-  // Player data
+  // Timer effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          setSuspended(true);
+          return 30; // Reset to 30 seconds
+        }
+        setSuspended(false);
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Dummy player data
   const players = [
     { id: "A", cards: [3, 3, 3] },
     { id: "B", cards: [2, 2, 2] },
@@ -55,32 +95,20 @@ console.log(gmid);
     },
   ];
 
-  // Timer effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 1) {
-          setSuspended(true);
-          return 30; // Reset to 30 seconds
-        }
-        setSuspended(false);
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+  // Show loading if game is not yet fetched
+  if (!game) {
+    return <div className="text-white">Loading game data...</div>;
+  }
 
   return (
     <div className="flex flex-col w-full h-full bg-grey text-white">
-      {/* Video Section with Fixed Height */}
+      {/* Video Section */}
       <div className="relative w-full h-[200px] bg-black">
-        {/* Video Player */}
-        <LiveStreaming url={`https://titan97.live/get-video/${gmid}`} />
+        <LiveStreaming url={`https://titan97.live/get-video/${game.gmid}`} />
 
-        {/* Overlay on Video */}
+        {/* Overlay */}
         <div className="absolute inset-0 flex p-2 text-white z-30">
-          {/* Players' Cards (Left Overlay) */}
+          {/* Players' Cards (Left) */}
           <div className="flex flex-col gap-2 p-2 rounded-md">
             {players.map((player, index) => (
               <div key={index} className="mb-2">
@@ -101,7 +129,7 @@ console.log(gmid);
 
           {/* Game ID & Timer (Top Right) */}
           <div className="absolute top-2 right-2 flex flex-col items-end gap-2">
-            <div className="text-xs bg-black px-2 py-1 rounded-md">RID: {gmid}</div>
+            <div className="text-xs bg-black px-2 py-1 rounded-md">RID: {game.gmid}</div>
             <div className="bg-black text-white text-2xl font-bold px-4 py-2 rounded-md">
               {timeRemaining}
             </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAllCasinoGame } from './casino.service.js';
+import { getAllCasinoGame  } from './casino.service.js';
 
 export const CasinoContext = createContext();
 
@@ -27,8 +27,12 @@ const CasinoProvider = ({ children }) => {
         }
     };
 
+    const getCasinoById = (id) => {
+        if (loading) return null;  
+        return allCasinoGames.find(game => game.gmid === id) || null;
+    };
     return (
-        <CasinoContext.Provider value={{ allCasinoGames, loading, error }}>
+        <CasinoContext.Provider value={{ allCasinoGames, loading, error ,getCasinoById }}>
             {children}
         </CasinoContext.Provider>
     );

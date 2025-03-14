@@ -2,10 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 const CasinoCard = ({ game }) => {
-  
   const navigate = useNavigate();
+
+
   
-  if (!game) return null;
+
   return (
     <div
       onClick={() => navigate(`/casino/${game.gmid}`, { state: game })}

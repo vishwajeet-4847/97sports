@@ -10,7 +10,7 @@ import ExchangeHeader from "./components/Roshan/Profile/ExchangeHeader.jsx";
 import { Homescreen } from "./screens/Homescreen.jsx";
 import EndedGameDetailsScreen from "./screens/EndedGameDetailsScreen.jsx";
 import { EventDetails } from "./screens/EventDetails.jsx";
-import CasinoProvider from "./services/casino.context.jsx";
+import CasinoProvider from "./services/casino/casino.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

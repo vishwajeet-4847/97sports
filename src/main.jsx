@@ -13,26 +13,28 @@ import { EventDetails } from "./screens/EventDetails.jsx";
 import CasinoProvider from "./services/casino/casino.context.jsx";
 import SportsProvider from "./services/allsports/sports.context.jsx";
 import Fullgame from "./screens/Fullgame.jsx";
+import SportsLoginScreen from "./components/login.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* <AuthProvider> */}
-    <SportsProvider >
-    <CasinoProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/" element={<Homescreen />} />
-            <Route path="/settings" element={<SettingHeader />} />
-            <Route path="/account" element={<ExchangeHeader />} />
-            <Route path="/in-play" element={<InPlayScreen />} />
-            <Route path="/game" element={<EndedGameDetailsScreen />} />
-            <Route path="/casino/:id" element={<EventDetails />} />
-            <Route path="/fullgame/:id" element={<Fullgame />} />
-          </Route>
-        </Routes>
-      </Router>
-    </CasinoProvider>
+    <SportsProvider>
+      <CasinoProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<SportsLoginScreen />} />
+            <Route path="/" element={<App />}>
+              <Route path="/" element={<Homescreen />} />
+              <Route path="/settings" element={<SettingHeader />} />
+              <Route path="/account" element={<ExchangeHeader />} />
+              <Route path="/in-play" element={<InPlayScreen />} />
+              <Route path="/game" element={<EndedGameDetailsScreen />} />
+              <Route path="/casino/:id" element={<EventDetails />} />
+              <Route path="/fullgame/:id" element={<Fullgame />} />
+            </Route>
+          </Routes>
+        </Router>
+      </CasinoProvider>
     </SportsProvider>
     {/* </AuthProvider> */}
   </StrictMode>

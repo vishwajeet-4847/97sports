@@ -2,7 +2,7 @@ import React from 'react'
 import ButtonGroup from '../components/ButtonGroup'
 
 import dummyMarketData from '../details/dummymarket'
-import GroupBox from '../components/GroupBox'
+import GroupBox from  '../components/GroupBox'
 
 import HorizontalScrollList from '../components/HorizontalScrollbar/HorizontalScrollBarList'
 import BottomNavigationBar from '../components/BottomNavigationBar'

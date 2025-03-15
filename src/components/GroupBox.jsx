@@ -1,7 +1,7 @@
 import React from 'react'
 import TitleBar from './TitleBar'
 
-import MatchList from './MatchList'
+import MatchList from './matchlist/MatchList2'
 
 const GroupBox = ({title , market}) => {
   return (

@@ -262,30 +262,7 @@ const Fullgame = () => {
         </div>
       </div>
 
-      {/* Bottom Nav */}
-      <div className="bg-gray-800 p-1 flex justify-around">
-        <button
-          className={`px-4 py-2 rounded-full ${
-            activeSection === "Winner"
-              ? "bg-white text-gray-800"
-              : "bg-gray-800 text-white"
-          }`}
-          onClick={() => setActiveSection("Winner")}
-        >
-          Winner
-        </button>
-        <button
-          className={`px-4 py-2 rounded-full ${
-            activeSection === "Bookmakers"
-              ? "bg-white text-gray-800"
-              : "bg-gray-800 text-white"
-          }`}
-          onClick={() => setActiveSection("Bookmakers")}
-        >
-          Bookmakers
-        </button>
-      </div>
-    </div>
+         </div>
   );
 };
 

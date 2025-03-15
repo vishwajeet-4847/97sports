@@ -10,4 +10,20 @@ export const  getAllSports = async ()=>{
     }
 
 }
+export const getMatchList = async (id)=>{
+    console.log(id);
+    
+    try{
+        const response = await axios.get(`https://titan97.live/get-matchlist/${id}`);
+      
+        
+        return response.data;
+
+    }catch(error){
+        console.error('Failed to fetch matchlist:', error.response?.data || error.message);
+        return error.response?.data || error.message;
+
+    }
+
+}
 

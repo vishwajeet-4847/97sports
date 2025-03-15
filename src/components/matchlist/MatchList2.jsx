@@ -1,7 +1,7 @@
 import React, { useState, useRef} from "react";
 
 import MatchRow from "./MatchRow";
-import CountryTab from "./CountryTab";
+import CountryTab from "../CountryTab";
 
 
 const MatchList = ({ matchList, isHome = false, isCountryHeader = false }) => {
@@ -74,9 +74,9 @@ const countryRowRef = useRef();
     >
       {/* Only render country tabs when isCountryHeader is true */}
       {isCountryHeader && countries.length > 0 && (
-        <div className="w-full overflow-x-auto custom-scrollbar bg-gray-100">
-          <table className="w-full border-collapse" style={{ minWidth: countries.length * 80 + "px" }}>
-            <tbody>
+        <div className="w-full overflow-x-auto custom-scrollbar bg-gray-100 ">
+          <div className="w-full border-collapse" style={{ minWidth: countries.length * 80 + "px" }}>
+      
            
             <div className="flex overflow-x-auto custom-scrollbar"  ref={countryRowRef }>
                 {countries.map((country) => (
@@ -88,8 +88,8 @@ const countryRowRef = useRef();
                 />
                 ))}
               </div>
-            </tbody>
-          </table>
+         
+          </div>
         </div>
       )}
 

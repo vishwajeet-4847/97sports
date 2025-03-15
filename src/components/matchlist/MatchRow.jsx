@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import PinButton from "./PinButton";
+import OddsTable from "./OddsTable";
 
-const MatchRow = ({ match , isCountryHeader }) => {
+const MatchRow = ({ match }) => {
   const navigate = useNavigate();
-  console.log(match);
-  
+
 
   return (
     <tr key={`match-${match.gmid}`} className="border-b border-[#c8ced3]">
@@ -45,18 +45,12 @@ const MatchRow = ({ match , isCountryHeader }) => {
         )}
       </td>
 
+      {/* Odds Display */}
+     <OddsTable sections={match.section} />
       {/* Pin Button */}
       <td className="text-center px-2 py-1 ">
         <PinButton />
       </td>
-
-      {/* Odds Display */}
-      { match.section?.odds?.map((odd, index) => (
-        <td key={index} className="text-center px-2 py-1 hidden md:table-cell">
-          <span className="bg-blue-400 text-black font-bold px-2 py-1">{odd.back}</span>
-          <span className="bg-red-400 text-black font-bold px-2 py-1 ml-1">{odd.lay}</span>
-        </td>
-      ))}
     </tr>
   );
 };

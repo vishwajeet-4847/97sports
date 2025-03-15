@@ -6,10 +6,11 @@ import HorizontalScrollList from "../components/HorizontalScrollbar/HorizontalSc
 import Footer from "../components/Footer";
 import SearchBar from "../components/search/SearchBar";
 
-import MatchList from "../components/MatchList2";
+
 import CasinoBox from "../components/casino/CasinoBox";
 import { SportsContext } from "../services/allsports/sports.context";
 import { CasinoContext } from "../services/casino/casino.context";
+import MatchList from "../components/matchlist/MatchList2";
 
 
 

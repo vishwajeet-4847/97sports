@@ -14,7 +14,7 @@ const CountryTab = ({ country, isActive, onClick }) => {
     <div 
       onClick={onClick}
       className={`
-        px-4 py-2 flex items-center gap-2 cursor-pointer transition-colors
+        px-4 py-2 flex items-center flex-col justify-center gap-2 cursor-pointer max-h-[40px] transition-colors
         ${isActive 
           ? 'bg-white font-medium ' 
           : 'bg-gray-100 hover:bg-gray-200'
@@ -25,7 +25,7 @@ const CountryTab = ({ country, isActive, onClick }) => {
             country.title !== "ALL" &&  <img src={getCountryFlagUrl(country.title)} alt="" className='h-[20px] w-[20px]' />
         }
      
-      <span>{country.title}</span>
+      <span className='text-xs'>{country.title}</span>
     </div>
   );
 };

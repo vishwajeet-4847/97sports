@@ -4,7 +4,7 @@ import SearchBarIcon from "../search/SearchBarIcon";
 
 import HorizontalScrollMenuItem from "./HorizontalScrollMenuItem";
 
-const HorizontalScrollList = ({ setSearchBar, menuItem = [], showSearchIcon, showAviator }) => {
+const HorizontalScrollList = ({ setSearchBar, menuItem = [], showSearchIcon, showAviator , onMenuItemClick = ()=>{} , setCurrentSportEid = ()=>{}}) => {
   const [activeTab, setActiveTab] = useState(menuItem.length > 0 ? menuItem[0].ename || menuItem[0].name : "");
 
   const scrollRef = useRef(null);
@@ -63,6 +63,11 @@ const HorizontalScrollList = ({ setSearchBar, menuItem = [], showSearchIcon, sho
             onClick={() => {
               scrollToElement(index);
               setActiveTab(item.ename || item.name);
+              setCurrentSportEid(item.eid)
+
+              onMenuItemClick(item.eid);
+
+             
             }}
           />
         ))}

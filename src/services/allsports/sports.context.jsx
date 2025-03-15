@@ -1,10 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { getAllSports } from './sports.service';
+import { getAllSports , getMatchList } from './sports.service';
 
 export const SportsContext = createContext();
 
 const SportsProvider = ({ children }) => {
   const [allSports, setAllSports] = useState([]);
+  const [matchList, setMatchList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,23 +14,38 @@ const SportsProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       try {
-        const sportsData = await getAllSports();
-        setAllSports(sportsData.data);
+        const response = await getAllSports();
+        setAllSports(response.data);
       } catch (err) {
-        setError(err.message || 'Something went wrong');
+        setError(err.message || "Something went wrong");
       } finally {
         setLoading(false);
       }
     };
-
     fetchSports();
+    getMatchListById(4);
   }, []);
 
+  const getMatchListById = async (matchId) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await getMatchList(matchId);
+      setMatchList(response.data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  
+
   return (
-    <SportsContext.Provider value={{ allSports, loading, error }}>
+    <SportsContext.Provider value={{ allSports, loading, error, getMatchListById, matchList }}>
       {children}
     </SportsContext.Provider>
   );
 };
 
-export default SportsProvider ;
+export default SportsProvider;

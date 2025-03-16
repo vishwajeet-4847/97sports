@@ -6,7 +6,7 @@ import GroupBox from  '../components/GroupBox'
 
 import HorizontalScrollList from '../components/HorizontalScrollbar/HorizontalScrollBarList'
 import BottomNavigationBar from '../components/BottomNavigationBar'
-import ListItem from '../components/ListItem'
+
 import CasinoBox from '../components/casino/CasinoBox'
 
 
@@ -24,11 +24,11 @@ const secondMenu =
 const InPlayScreen = () => {
   
   return (
-    <div>
+    <div className='pb-[150px]'>
     <ButtonGroup />
-    <GroupBox title={"cricket"} market={[dummyMarketData[0]]} />
+    <GroupBox title={"Cricket"} market={[dummyMarketData[0]]} />
     <HorizontalScrollList menuItem={secondMenu}/>
-    <ListItem item={"Cricket"} classname={"text-[#2789ce] font-semibold text-[4vw] "}  />
+  
       <CasinoBox />
       <BottomNavigationBar />
     </div>

@@ -13,6 +13,7 @@ import { EventDetails } from "./screens/EventDetails.jsx";
 import CasinoProvider from "./services/casino/casino.context.jsx";
 import SportsProvider from "./services/allsports/sports.context.jsx";
 import Fullgame from "./screens/Fullgame.jsx";
+import SportsScreen from "./screens/SportsScreen.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,7 +24,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="/" element={<Homescreen />} />
-            <Route path="/sports" element={< ></>} />
+            <Route path="/sports" element={<SportsScreen />} />
             <Route path="/settings" element={<SettingHeader />} />
             <Route path="/account" element={<ExchangeHeader />} />
             <Route path="/in-play" element={<InPlayScreen />} />

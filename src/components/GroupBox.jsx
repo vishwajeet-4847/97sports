@@ -6,7 +6,7 @@ import MatchList from './matchlist/MatchList2'
 const GroupBox = ({title , market}) => {
   return (
     <div>
-        <TitleBar title={title} />
+        <TitleBar title={title}  fontSize='text-3.7777vw font-bold'/>
         <MatchList marketData={market} />
     </div>
   )

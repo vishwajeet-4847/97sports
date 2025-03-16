@@ -23,6 +23,8 @@ export const Homescreen = () => {
   const isCountryHeader = currentSportEid === 10 || currentSportEid === 65;
 
   const { allSports, getMatchListById, matchList } = useContext(SportsContext);
+  console.log(matchList);
+  
   
   
 

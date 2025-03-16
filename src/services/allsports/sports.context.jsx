@@ -31,7 +31,9 @@ const SportsProvider = ({ children }) => {
     setError(null);
     try {
       const response = await getMatchList(matchId);
-      setMatchList(response.data);
+      setMatchList([...(response.data.t1 || []), ...(response.data.t2 || [])]);
+    //  setMatchList(response.data);
+      
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {

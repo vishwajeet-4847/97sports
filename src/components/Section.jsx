@@ -1,8 +1,8 @@
 import React from "react";
 
-const Section = ({ children, className = "" , backgroundImage }) => {
+const Section = ({ children, classname = "" , backgroundImage }) => {
   return (
-    <section className={`w-full bg-gray-100 py-8 ${className}`} style={{ backgroundImage: `url(${backgroundImage || ""})` }}>
+    <section className={`w-full  py-8 ${!classname?"bg-gray-100":classname}`} style={{ backgroundImage: `url(${backgroundImage || ""})` }}>
       <div className="w-[95%] mx-auto">{children}</div>
     </section>
   );

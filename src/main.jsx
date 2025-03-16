@@ -13,6 +13,7 @@ import { EventDetails } from "./screens/EventDetails.jsx";
 import CasinoProvider from "./services/casino/casino.context.jsx";
 import SportsProvider from "./services/allsports/sports.context.jsx";
 import Fullgame from "./screens/Fullgame.jsx";
+import SportsLoginScreen from "./components/login.jsx";
 import SportsScreen from "./screens/SportsScreen.jsx";
 
 createRoot(document.getElementById("root")).render(

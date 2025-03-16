@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import ListItem from './ListItem';
+import { useNavigate } from 'react-router';
 
 const SportsMenu = ({ sports, onItemClick }) => {
+
+const navigate = useNavigate();
  
-  
+  const handleNavigateClick = (gmid , etid )=>{
+     navigate(`/fullgame/${gmid}`, { state :{ etid}})
+
+  };
   
   const [expandedSports, setExpandedSports] = useState({});
   
@@ -38,7 +44,10 @@ const SportsMenu = ({ sports, onItemClick }) => {
             />
             {/* Only show matches if this sport is expanded */}
             {expandedSports[index] && 
-              sport.matches?.map((match, matchIndex) => (
+              sport.matches?.map((match, matchIndex) => {
+                console.log(match);
+                
+                return (
                 <ListItem
                   preIcon={true}
                   key={matchIndex}
@@ -46,9 +55,9 @@ const SportsMenu = ({ sports, onItemClick }) => {
                   classname="text-blue-400 font-bold px-5 "
                   isToggle={false}
                   isIcon={true}
-                
+                  onClick={()=>handleNavigateClick(match.gmid, match.etid)}
                 />
-              ))
+              )})
             }
           </React.Fragment>
         ))

@@ -1,13 +1,14 @@
 import React from 'react'
-import TitleBar from './TitleBar'
 
-import MatchList from './matchlist/MatchList2'
 
-const GroupBox = ({title , market}) => {
+const GroupBox = ({children}) => {
+ 
+ 
+  
+  
   return (
     <div>
-        <TitleBar title={title}  fontSize='text-3.7777vw font-bold'/>
-        <MatchList marketData={market} />
+       {children}
     </div>
   )
 }

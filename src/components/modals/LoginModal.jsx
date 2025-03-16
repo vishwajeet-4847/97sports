@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../services/auth/auth.context";
 import { useLocation, useNavigate } from "react-router";
 
+
 const LoginModal = ({ isOpen, onClose }) => {
-  const { onLogin } = useContext(AuthContext);
+  const { onLogin , onLoginWithUsernameAndPassword } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +34,11 @@ const LoginModal = ({ isOpen, onClose }) => {
     onLogin();
     navigate(location.pathname, { replace: true });
     onClose();
+  }
+  const handleLoginWithCredentials=(username , password)=>{
+    onLoginWithUsernameAndPassword(username, password);
+      navigate(location.pathname, { replace: true });
+      onClose();
   }
   
   if (!isOpen) return null;
@@ -116,7 +122,9 @@ const LoginModal = ({ isOpen, onClose }) => {
           </div>
           
           {/* Login Button */}
-          <button className="w-full bg-red-700 text-white p-2 rounded-md font-medium shadow-md hover:bg-red-800 transition">
+          <button onClick={
+            handleLoginWithCredentials
+          } className="w-full bg-red-700 text-white p-2 rounded-md font-medium shadow-md hover:bg-red-800 transition">
             Login
           </button>
           

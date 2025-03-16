@@ -32,13 +32,14 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/sports" element={<SportsScreen />} />
                 <Route path="/in-play" element={<InPlayScreen />} />
                 <Route path="/game" element={<EndedGameDetailsScreen />} />
+                <Route path="/fullgame/:id" element={<Fullgame />} />
 
                 {/* Protected Routes */}
                 <Route element={<ProtectedRoute />}>
                   <Route path="/settings" element={<SettingHeader />} />
                   <Route path="/account" element={<ExchangeHeader />} />
                   <Route path="/casino/:id" element={<EventDetails />} />
-                  <Route path="/fullgame/:id" element={<Fullgame />} />
+                  
                 </Route>
               </Route>
             </Routes>

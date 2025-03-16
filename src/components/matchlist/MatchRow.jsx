@@ -8,13 +8,12 @@ const MatchRow = ({ match  , noPins}) => {
   
   const navigate = useNavigate();
 
-
   return (
     <tr key={`match-${match.gmid}`} className="border-b border-[#c8ced3]">
       {/* Event Name */}
       <td className="px-2 py-2 text-left">
         <a
-          onClick={() => navigate(`/fullgame/${match.gmid}`)}
+          onClick={() => navigate(`/fullgame/${match.gmid}/?sid=${match.etid}`)}
           href="#"
           className="font-bold text-[#2789ce] no-underline"
         >
@@ -48,7 +47,7 @@ const MatchRow = ({ match  , noPins}) => {
       </td>
 
       {/* Odds Display */}
-     <OddsTable sections={match.section} />
+      <OddsTable sections={match.section} />
       {/* Pin Button */}
       <td className="text-center px-2 py-1 ">
         {

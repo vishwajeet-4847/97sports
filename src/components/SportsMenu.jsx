@@ -40,11 +40,13 @@ const SportsMenu = ({ sports, onItemClick }) => {
             {expandedSports[index] && 
               sport.matches?.map((match, matchIndex) => (
                 <ListItem
+                  preIcon={true}
                   key={matchIndex}
-                  item={match.cname}
-                  classname="text-blue-400 font-bold px-5"
+                  item={match.ename}
+                  classname="text-blue-400 font-bold px-5 "
                   isToggle={false}
                   isIcon={true}
+                
                 />
               ))
             }

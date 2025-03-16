@@ -35,6 +35,7 @@ const SportsProvider = ({ children }) => {
     //  setMatchList(response.data);
       
     } catch (err) {
+      setMatchList([]);
       setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Modal from "./Modal"; // Import your modal component
+
 import androidapkpng from "../assets/androidapk.png";
 import knowYourCustomerPolicy from "../details/knowyourcustomerpolicy";
 import privacyPolicy from "../details/privacypolicy";
+import Modal from "./modals/Modal";
 
 
 const Footer = () => {

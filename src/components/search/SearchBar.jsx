@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = ({ setSearchBar }) => {  
+  console.log("here");
+  
   const searchRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
 

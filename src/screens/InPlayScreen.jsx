@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import ButtonGroup from '../components/ButtonGroup'
 
-import dummyMarketData from '../details/dummymarket'
+
 import GroupBox from  '../components/GroupBox'
 
 import HorizontalScrollList from '../components/HorizontalScrollbar/HorizontalScrollBarList'
 import BottomNavigationBar from '../components/BottomNavigationBar'
-import ListItem from '../components/ListItem'
+
 import CasinoBox from '../components/casino/CasinoBox'
+import { SportsContext } from '../services/allsports/sports.context'
+import MatchList from '../components/matchlist/MatchList2'
+import TitleBar from '../components/TitleBar'
 
 
 const secondMenu =
@@ -22,16 +25,52 @@ const secondMenu =
   { id: "sportsBar7", name: "PLATINGAMES" },
 ]
 const InPlayScreen = () => {
+  const [activeCategory, setActiveCategory] = useState("inPlay");
+  const { inPlayMatches } = useContext(SportsContext);
+
+  console.log(inPlayMatches);
+  
+  
+
+  
+  
+
+
+  
   
   return (
-    <div>
-    <ButtonGroup />
-    <GroupBox title={"cricket"} market={[dummyMarketData[0]]} />
-    <HorizontalScrollList menuItem={secondMenu}/>
-    <ListItem item={"Cricket"} classname={"text-[#2789ce] font-semibold text-[4vw] "}  />
-      <CasinoBox />
-      <BottomNavigationBar />
-    </div>
+    <div className='pb-[150px]'>
+  <ButtonGroup  onClickItem={setActiveCategory} active={activeCategory}/>
+  
+  {inPlayMatches.length > 0 ? (
+    inPlayMatches.map((matches, i) => {
+     
+      if(matches[activeCategory].length < 1) return null;
+
+        return (
+          <GroupBox key={i}>
+            <TitleBar 
+              title={matches.name || "Matches"} 
+              background=' bg-gradient-to-b from-[#243a48] via-[#243a48] to-[#172732] text-white'
+              fontSize='text-3.7777vw font-bold mt-2'
+            />
+            <MatchList 
+              matchList={matches[activeCategory]} 
+              classname={true} 
+              noPins={true} 
+            
+            />
+          </GroupBox>
+        );
+      }))
+       : (
+    <div className="text-center py-4 text-gray-500">No matches available</div>
+  )}
+  
+  <HorizontalScrollList menuItem={secondMenu} />
+  <CasinoBox />
+  <BottomNavigationBar />
+</div>
   )
 }
 

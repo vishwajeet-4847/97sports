@@ -3,7 +3,9 @@ import { useNavigate } from "react-router";
 import PinButton from "./PinButton";
 import OddsTable from "./OddsTable";
 
-const MatchRow = ({ match }) => {
+const MatchRow = ({ match  , noPins}) => {
+
+  
   const navigate = useNavigate();
 
   return (
@@ -15,7 +17,7 @@ const MatchRow = ({ match }) => {
           href="#"
           className="font-bold text-[#2789ce] no-underline"
         >
-          {match.ename}
+          {match.ename || match.name}
         </a>
         {match.iplay && (
           <span className="text-red-500 text-sm font-semibold ml-2 color-change-animation">
@@ -48,7 +50,10 @@ const MatchRow = ({ match }) => {
       <OddsTable sections={match.section} />
       {/* Pin Button */}
       <td className="text-center px-2 py-1 ">
-        <PinButton />
+        {
+            !noPins && <PinButton />
+        }
+        
       </td>
     </tr>
   );

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams, useSearchParams } from "react-router";
 
 const Fullgame = () => {
   const [activeTab, setActiveTab] = useState("Winner");
   const [activeSection, setActiveSection] = useState("Winner");
-
+  const [apiData, setApiData] = useState([]);
   const tabs = ["All", "Popular", "Winner", "Bookmakers"];
 
   const winnerData = [
@@ -79,6 +81,38 @@ const Fullgame = () => {
     },
   ];
 
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const sid = searchParams.get("sid");
+
+  useEffect(() => {
+    const fetchGameDetails = async () => {
+      console.log("fetching details ");
+
+      try {
+        const response = await axios.post(
+          "https://titan97.live/get-bookmaker",
+          {
+            gmid: id,
+            sid: sid,
+          }
+        );
+
+        console.log(response.data);
+        const filteredData = response.data.data.filter((data) =>
+          ["MATCH_ODDS", "Bookmaker", "Tried Match"].includes(data.mname)
+        );
+        setApiData(filteredData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchGameDetails();
+  }, []);
+
+  console.log(apiData);
+
   return (
     <div className="w-full max-w-3xl mx-auto bg-gray-100 overflow-hidden rounded shadow">
       {/* Header */}
@@ -91,14 +125,12 @@ const Fullgame = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex w-full bg-gray-200 border-b border-gray-300">
+      <div className="flex w-full gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
         {tabs.map((tab) => (
           <button
             key={tab}
-            className={`px-4 py-2 text-sm flex-1 ${
-              activeTab === tab
-                ? "bg-green-800 text-white"
-                : "bg-gray-200 text-gray-700"
+            className={`p-2 font-bold border-1 border-black rounded-4xl text-sm ${
+              activeTab === tab ? "bg-[#016630] text-white" : "bg-[#2c485a]"
             }`}
             onClick={() => setActiveTab(tab)}
           >
@@ -106,163 +138,81 @@ const Fullgame = () => {
           </button>
         ))}
       </div>
+      {apiData &&
+        apiData.length &&
+        apiData.map((data) => (
+          <>
+            <div className="bg-white">
+              {/* Winner Section */}
+              <div
+                className={`${activeSection === "Winner" ? "block" : "hidden"}`}
+              >
+                <div className="flex justify-between items-center bg-white text-white ">
+                  <div className="flex w-fit items-center p-2 rounded-tr-xl bg-gray-800 ">
+                    <span className="font-bold text-xs">{data.mname}</span>
+                    <svg
+                      className="w-4 h-4 ml-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4m0 4h.01"
+                      />
+                    </svg>
+                  </div>
+                  <div className="text-xs text-black mr-2 font-semibold">
+                    Matched € 9.6K
+                  </div>
+                </div>
 
+                <div className="border-b text-[5px] border-gray-300">
+                  <div className="flex font-bold text-sm">
+                    <div className="w-1/2 p-2"></div>
+                    <div className="w-1/4 p-2 text-center bg-[#72bbef] border-l border-gray-300">
+                      Back
+                    </div>
+                    <div className="w-1/4 p-2 text-center bg-[#faa9ba] border-l border-gray-300">
+                      Lay
+                    </div>
+                  </div>
+
+                  {data.section.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex text-[15px] text-sm border-t border-gray-200"
+                    >
+                      <div className="w-1/2 p-2 font-medium">{item?.nat}</div>
+                      <div className="w-1/4 border-l border-gray-300">
+                        <div className="bg-[#72bbef] p-1 text-center font-bold">
+                          {item.odds[0]?.odds}
+                        </div>
+                        <div className="bg-[#72bbef] p-1 text-center ">
+                          {item.odds[0]?.size}
+                        </div>
+                      </div>
+                      <div className="w-1/4 border-l border-gray-300">
+                        <div className="bg-[#faa9ba] p-1 text-center font-bold">
+                          {item.odds[0]?.odds}
+                        </div>
+                        <div className="bg-[#faa9ba] p-1 text-center ">
+                          {item.odds[0]?.size}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        ))}
       {/* Sections */}
-      <div className="bg-white">
-        {/* Winner Section */}
-        <div className={`${activeSection === "Winner" ? "block" : "hidden"}`}>
-          <div className="flex justify-between items-center bg-white text-white ">
-            <div className="flex w-fit items-center p-2 rounded-tr-xl bg-gray-800 ">
-              <span className="font-bold">Winner</span>
-              <svg
-                className="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8v4m0 4h.01"
-                />
-              </svg>
-            </div>
-            <div className="text-xs text-black mr-2 font-semibold">
-              Matched € 9.6K
-            </div>
-          </div>
-
-          <div className="border-b border-gray-300">
-            <div className="flex font-bold text-sm">
-              <div className="w-1/2 p-2"></div>
-              <div className="w-1/4 p-2 text-center bg-[#72bbef] border-l border-gray-300">
-                Back
-              </div>
-              <div className="w-1/4 p-2 text-center bg-[#faa9ba] border-l border-gray-300">
-                Lay
-              </div>
-            </div>
-
-            {winnerData.map((item, index) => (
-              <div
-                key={index}
-                className="flex text-sm border-t border-gray-200"
-              >
-                <div className="w-1/2 p-2 font-medium">{item.team}</div>
-                <div className="w-1/4 border-l border-gray-300">
-                  <div className="bg-[#72bbef] p-1 text-center font-bold">
-                    {item.back}
-                  </div>
-                  <div className="bg-[#72bbef] p-1 text-center text-xs">
-                    {item.backAmount}
-                  </div>
-                </div>
-                <div className="w-1/4 border-l border-gray-300">
-                  <div className="bg-[#faa9ba] p-1 text-center font-bold">
-                    {item.lay}
-                  </div>
-                  <div className="bg-[#faa9ba] p-1 text-center text-xs">
-                    {item.layAmount}
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            <div className="flex justify-between items-center bg-white text-white ">
-              <div className="flex w-fit items-center p-2 rounded-tr-xl bg-gray-800 ">
-                <span className="font-bold">Bookmakers</span>
-                <svg
-                  className="w-4 h-4 ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8v4m0 4h.01"
-                  />
-                </svg>
-              </div>
-              <div className="text-xs text-black mr-2 font-semibold">
-                Matched € 9.6K
-              </div>
-            </div>
-
-            {bookmakerData.map((item, index) => (
-              <div
-                key={index}
-                className="flex text-sm border-t border-gray-200 relative"
-              >
-                <div className="w-1/2 p-2 font-medium">{item.team}</div>
-                <div className="w-1/4 border-l border-gray-300">
-                  <div className="bg-[#72bbef] p-1 text-center font-bold">
-                    {item.back}
-                  </div>
-                  <div className="bg-blue-100 p-1 text-center text-xs">
-                    {item.backAmount}
-                  </div>
-                </div>
-                <div className="w-1/4 border-l border-gray-300">
-                  <div className="bg-pink-200 p-1 text-center font-bold">
-                    {item.lay}
-                  </div>
-                  <div className="bg-pink-100 p-1 text-center text-xs">
-                    {item.layAmount}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bookmakers Section */}
-        <div
-          className={`${activeSection === "Bookmakers" ? "block" : "hidden"}`}
-        >
-          <div className="flex justify-between items-center bg-gray-800 text-white p-2">
-            <div className="flex items-center">
-              <span className="font-bold">Bookmakers</span>
-              <svg
-                className="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="12" cy="12" r="10" strokeWidth="2" />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8v4m0 4h.01"
-                />
-              </svg>
-            </div>
-            <div className="text-xs">Matched € 292.1K</div>
-          </div>
-
-          <div className="border-b border-gray-300">
-            <div className="flex text-sm">
-              <div className="w-1/2 p-2"></div>
-              <div className="w-1/4 p-2 text-center bg-gray-200 border-l border-gray-300">
-                Back
-              </div>
-              <div className="w-1/4 p-2 text-center bg-pink-200 border-l border-gray-300">
-                Lay
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-         </div>
+    </div>
   );
 };
 

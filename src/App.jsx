@@ -1,17 +1,23 @@
 
 
-import React , { useState } from 'react'
+import React , { useContext } from 'react'
 import './App.css'
-import Header from './components/header/header'
+
 import BottomNavigationBar from './components/BottomNavigationBar'
 import { Outlet } from 'react-router'
+import { AuthContext } from './services/auth/auth.context'
+import HeaderBlue from './components/Roshan/Profile/HeaderBlue'
+import Header from './components/header/Header'
 
 
 function App() {
-  const [LoggedIn, setLoggedIn] = useState (false)
+  const { isAuthenticated } = useContext(AuthContext)
   return (
     <>
-     <Header />
+    {
+      isAuthenticated ? <HeaderBlue /> : <Header/>  
+    }
+     
      <Outlet />
       <BottomNavigationBar />
     

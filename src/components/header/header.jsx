@@ -1,69 +1,69 @@
-import React, { useState } from "react";
-import AgeVerificationModal from "../modals/AgeVerificationModal";
+import React, {  useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import SearchBar from '../search/SearchBar';
+import AgeVerificationModal from '../modals/AgeVerificationModal';
+
+import LoginModal from '../modals/LoginModal';
 
 const Header = () => {
-    const [showSearch, setShowSearch] = useState(false);
-    const [showAgeModal, setShowAgeModal] = useState(true);
-    const handleConfirmAge = () => {
-        setShowAgeModal(false);
-      };
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [ searchbar , setSearchBar ] = useState(false);
+  const [showAgeVerificationModal, setShowAgeVerificationModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
-    return (
-        <header className="flex items-center justify-between p-4 shadow-md bg-gradient-to-b from-[#315195] to-[#14213D]">
-            {/* Left Side - Logo */}
-            <div className="flex items-center">
-                <img 
-                    src="https://97sports.in/api/users/images/theme-1709707142654-97sports.png" 
-                    alt="Site Logo" 
-                    className="h-10 w-auto cursor-pointer"
-                />
-            </div>
-            <div className="flex items-center space-x-2 w-2/5 justify-end relative">
-                <div className="hidden md:flex items-center justify-end w-full">
-                    {showSearch &&    <input 
-                        type="text" 
-                        placeholder="Search..." 
-                        className=" absolute left-[-50%] block w-[150px] mt-[9px] h-[25px] px-3.5 py-1.5 border border-[#dee2e6] rounded-md text-sm font-normal leading-6 text-[#212529] bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />}
-                   
+  
+  return (
+    <div className="w-full font-sans">
+      {/* Desktop Navigation */}
+      <div className=" flex items-center justify-between bg-gradient-to-b from-[#315195] to-[#14213D] p-4">
+        <div className="flex items-center">
+          <img
+            src="https://97sports.in/api/users/images/theme-1709707142654-97sports.png"
+            alt="Site Logo"
+            className="h-10 w-auto cursor-pointer"
+          />
+        </div>
 
-                    <div className="login-form flex gap-1.5 item-center w-full justify-end mx-1">
-                    <button onClick={() => setShowSearch(!showSearch)} className="text-white text-center">
-                        <i className="fas fa-search-plus text-xl"></i>
-                        </button>
-                        <input 
-                        type="text" 
-                        placeholder="Username" 
-                        className="block w-[150px] mt-[9px] h-[25px] px-3.5 py-1.5 border border-[#dee2e6] rounded-md text-sm font-normal leading-6 text-[#212529] bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                        maxLength="13" 
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        className="block w-[150px] mt-[9px] h-[25px] px-3.5 py-1.5 border border-[#dee2e6] rounded-md text-sm font-normal leading-6 text-[#212529] bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    />
-                    </div>
-                   
-                </div>
-                <button
-                    onClick={() => setShowAgeModal(true)}
-                 className="text-white  px-1 py-2 rounded-md transition bg-gradient-to-b from-[#f72424] to-[#bb1c00] hover:opacity-90 ">
-                        Login
-                        <i className="fas fa-sign-in text-md"></i>
-                    </button>
-
-
-            </div>
-            
-              
-
-<AgeVerificationModal 
-        isOpen={showAgeModal}
-        onClose={() => setShowAgeModal(false)}
-        onConfirm={handleConfirmAge}
-      />
-        </header>
-    );
+        <div className="flex items-center space-x-4 hidden md:flex">
+          <FaSearch className="h-5 w-5 text-lg  text-white"  onClick={()=>{setSearchBar(true)}}/>
+          {
+            searchbar && <SearchBar setSearchBar={setSearchBar} />
+          }
+          
+          <input
+            type="text"
+            className="px-3 py-1 text-sm bg-white rounded-full outline-none w-28"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          
+          <input
+            type="password"
+            className="px-3 py-1 text-sm bg-white rounded-full outline-none w-28"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+         
+         
+        </div>
+        <button
+            onClick={() =>{
+              setShowAgeVerificationModal(true);
+            }}
+           className="bg-gradient-to-b from-[#f72424] to-[#bb1c00] text-white px-4 py-2 rounded-sm hover:opacity-90 transition duration-300">
+            Login →
+          </button>
+      </div>
+      
+      
+      
+      <AgeVerificationModal  isOpen={showAgeVerificationModal} onClose={()=>{setShowAgeVerificationModal(false)}} onConfirm={()=>setShowLoginModal(true)}/>
+      <LoginModal isOpen={showLoginModal} onClose={()=>{ showLoginModal(false)}} />
+    </div>
+  );
 };
 
 export default Header;

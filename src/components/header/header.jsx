@@ -1,18 +1,18 @@
-import React, {  useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import SearchBar from '../search/SearchBar';
-import AgeVerificationModal from '../modals/AgeVerificationModal';
+import React, { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+import SearchBar from "../search/SearchBar";
+import AgeVerificationModal from "../modals/AgeVerificationModal";
 
-import LoginModal from '../modals/LoginModal';
+import LoginModal from "../modals/LoginModal";
 
 const Header = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [ searchbar , setSearchBar ] = useState(false);
-  const [showAgeVerificationModal, setShowAgeVerificationModal] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [searchbar, setSearchBar] = useState(false);
+  const [showAgeVerificationModal, setShowAgeVerificationModal] =
+    useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  
   return (
     <div className="w-full font-sans">
       {/* Desktop Navigation */}
@@ -26,11 +26,14 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-4 hidden md:flex">
-          <FaSearch className="h-5 w-5 text-lg  text-white"  onClick={()=>{setSearchBar(true)}}/>
-          {
-            searchbar && <SearchBar setSearchBar={setSearchBar} />
-          }
-          
+          <FaSearch
+            className="h-5 w-5 text-lg  text-white"
+            onClick={() => {
+              setSearchBar(true);
+            }}
+          />
+          {searchbar && <SearchBar setSearchBar={setSearchBar} />}
+
           <input
             type="text"
             className="px-3 py-1 text-sm bg-white rounded-full outline-none w-28"
@@ -38,7 +41,7 @@ const Header = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          
+
           <input
             type="password"
             className="px-3 py-1 text-sm bg-white rounded-full outline-none w-28"
@@ -46,22 +49,30 @@ const Header = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-         
-         
         </div>
         <button
-            onClick={() =>{
-              setShowAgeVerificationModal(true);
-            }}
-           className="bg-gradient-to-b from-[#f72424] to-[#bb1c00] text-white px-4 py-2 rounded-sm hover:opacity-90 transition duration-300">
-            Login →
-          </button>
+          onClick={() => {
+            setShowAgeVerificationModal(true);
+          }}
+          className="bg-gradient-to-b from-[#f72424] to-[#bb1c00] text-white px-4 py-2 rounded-sm hover:opacity-90 transition duration-300"
+        >
+          Login →
+        </button>
       </div>
-      
-      
-      
-      <AgeVerificationModal  isOpen={showAgeVerificationModal} onClose={()=>{setShowAgeVerificationModal(false)}} onConfirm={()=>setShowLoginModal(true)}/>
-      <LoginModal isOpen={showLoginModal} onClose={()=>{ showLoginModal(false)}} />
+
+      <AgeVerificationModal
+        isOpen={showAgeVerificationModal}
+        onClose={() => {
+          setShowAgeVerificationModal(false);
+        }}
+        onConfirm={() => setShowLoginModal(true)}
+      />
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => {
+          showLoginModal(false);
+        }}
+      />
     </div>
   );
 };

@@ -13,7 +13,7 @@ export const getAllSports = async () => {
   }
 };
 export const getMatchList = async (id) => {
-  console.log(id);
+  //(id);
 
   try {
     const response = await axios.get(
@@ -31,7 +31,9 @@ export const getMatchList = async (id) => {
 };
 export const getAllMatchList = async () => {
   try {
-    const response = await axios.get("https://titan97.live/get-allsportsmatchlist");
+    const response = await axios.get(
+      "https://titan97.live/get-allsportsmatchlist"
+    );
 
     return response.data;
   } catch (error) {

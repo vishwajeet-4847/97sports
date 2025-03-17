@@ -17,8 +17,7 @@ export const Homescreen = () => {
   const [searchBar, setSearchBar] = useState(false);
   const [currentSportEid, setCurrentSportEid] = useState(4);
 
-  const { allCasinoGames } = useContext(CasinoContext);
-  const [ currentSportEid , setCurrentSportEid ] = useState(4);
+ 
   const { isAuthenticated } = useContext(AuthContext);
 
   const isCountryHeader = currentSportEid === 10 || currentSportEid === 65;

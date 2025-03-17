@@ -17,13 +17,12 @@ import Fullgame from "./screens/Fullgame.jsx";
 import SportsScreen from "./screens/SportsScreen.jsx";
 import { AuthProvider } from "./services/auth/auth.context.jsx";
 import ProtectedRoute from "./screens/ProtectedRoute.jsx";
+import CasinoBox from "./components/casino/CasinoBox.jsx";
 import CasinoScreen from "./screens/CasinoScreen.jsx";
-
-
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-  <AuthProvider>
+    <AuthProvider>
       <SportsProvider>
         <CasinoProvider>
           <Router>
@@ -41,7 +40,7 @@ createRoot(document.getElementById("root")).render(
                   <Route path="/settings" element={<SettingHeader />} />
                   <Route path="/account" element={<ExchangeHeader />} />
                   <Route path="/casino/:id" element={<EventDetails />} />
-                  
+                  <Route path="/casino" element={<CasinoBox />} />
                 </Route>
               </Route>
             </Routes>

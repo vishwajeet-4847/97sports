@@ -35,12 +35,19 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setLoading(false);
   };
-
   // Login with username & password
   const onLoginWithUsernameAndPassword = async (username, password) => {
     setLoading(true);
     try {
       const user = await onLoginWithCredentials(username, password);
+      setUser(user);
+      setIsAuthenticated(true);
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+      setError(e);
+      //("Failed to login", e);
+    }
       localStorage.setItem("user", JSON.stringify(user));
       setUser(user);
       setIsAuthenticated(true);

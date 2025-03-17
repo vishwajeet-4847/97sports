@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import ListItem from './ListItem';
-import { useNavigate } from 'react-router';
+import React, { useState } from "react";
+import ListItem from "./ListItem";
+import { useNavigate } from "react-router";
 
 const SportsMenu = ({ sports, onItemClick }) => {
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
- 
-  const handleNavigateClick = (gmid , etid )=>{
-     navigate(`/fullgame/${gmid}`, { state :{ etid}})
-
+  const handleNavigateClick = (gmid, etid) => {
+    navigate(`/fullgame/${gmid}`, { state: { etid } });
   };
-  
+
   const [expandedSports, setExpandedSports] = useState({});
-  
+
   // Toggle expansion for a specific sport
   const toggleSport = (sportId) => {
-    setExpandedSports(prev => ({
+    setExpandedSports((prev) => ({
       ...prev,
-      [sportId]: !prev[sportId]
+      [sportId]: !prev[sportId],
     }));
   };
 
@@ -30,35 +28,32 @@ const navigate = useNavigate();
               item={sport?.ename || sport.cname}
               classname="text-blue-400 font-bold"
               isToggle={true}
-              
               onClick={() => {
-                if(sport.ename){
-                    onItemClick(sport.eid);
-                }else{
-                    toggleSport(index)}
+                if (sport.ename) {
+                  onItemClick(sport.eid);
+                } else {
+                  toggleSport(index);
                 }
-                
-            }
-             
+              }}
               isExpanded={expandedSports[index] || false}
             />
             {/* Only show matches if this sport is expanded */}
-            {expandedSports[index] && 
+            {expandedSports[index] &&
               sport.matches?.map((match, matchIndex) => {
-                console.log(match);
-                
+                //(match);
+
                 return (
-                <ListItem
-                  preIcon={true}
-                  key={matchIndex}
-                  item={match.ename}
-                  classname="text-blue-400 font-bold px-5 "
-                  isToggle={false}
-                  isIcon={true}
-                  onClick={()=>handleNavigateClick(match.gmid, match.etid)}
-                />
-              )})
-            }
+                  <ListItem
+                    preIcon={true}
+                    key={matchIndex}
+                    item={match.ename}
+                    classname="text-blue-400 font-bold px-5 "
+                    isToggle={false}
+                    isIcon={true}
+                    onClick={() => handleNavigateClick(match.gmid, match.etid)}
+                  />
+                );
+              })}
           </React.Fragment>
         ))
       ) : (

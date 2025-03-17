@@ -20,21 +20,18 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
- const  onLoginWithUsernameAndPassword = async (username , password) => {
-     setLoading(true);
-     try{
+  const onLoginWithUsernameAndPassword = async (username, password) => {
+    setLoading(true);
+    try {
       const user = await onLoginWithCredentials(username, password);
-    setUser(user);
-    setIsAuthenticated(true);
-    setLoading(false);
-     }catch(e){
+      setUser(user);
+      setIsAuthenticated(true);
+      setLoading(false);
+    } catch (e) {
       setLoading(false);
       setError(e);
-      console.log("Failed to login", e);
-     }
-     
-    
-
+      //("Failed to login", e);
+    }
   };
   return (
     <AuthContext.Provider
@@ -45,7 +42,7 @@ export const AuthProvider = ({ children }) => {
         error,
         onLogin,
         onLogout,
-        onLoginWithUsernameAndPassword
+        onLoginWithUsernameAndPassword,
       }}
     >
       {children}

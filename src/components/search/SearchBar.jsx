@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const SearchBar = ({ setSearchBar }) => {  
-  console.log("here");
-  
+const SearchBar = ({ setSearchBar }) => {
+  //("here");
+
   const searchRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -37,7 +37,10 @@ const SearchBar = ({ setSearchBar }) => {
         className="w-full max-w-md bg-white rounded-md shadow-lg p-2 flex items-center border border-gray-300"
       >
         {/* Search Icon */}
-        <FontAwesomeIcon icon={faSearch} className="text-gray-500 text-lg mx-2" />
+        <FontAwesomeIcon
+          icon={faSearch}
+          className="text-gray-500 text-lg mx-2"
+        />
 
         {/* Search Input */}
         <input

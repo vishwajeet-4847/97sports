@@ -9,7 +9,7 @@ const CasinoBox = () => {
   const { allCasinoGames } = useContext(CasinoContext);
   
   return (
-      <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png">
+      <Section backgroundImage="https://97sports.in/casinobg.4aafd0d08a047031.png" classname='max-w-lg m-auto'>
           <GridContainer>
   {allCasinoGames.length > 0 ? (
     allCasinoGames.map((game, index) => (

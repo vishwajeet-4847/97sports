@@ -1,41 +1,56 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { onLoginWithCredentials } from "./auth.service";
 
 export const AuthContext = createContext();
+
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Load user from local storage on app start
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsAuthenticated(true);
+    }
+    setLoading(false);
+  }, []);
+
+  // Save user data to local storage on login
   const onLogin = () => {
-    // Simulate login logic
-    setUser({ id: 1, name: "John Doe" });
+    const userData = { id: 1, name: "John Doe" };
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
     setIsAuthenticated(true);
     setLoading(false);
   };
+
+  // Clear local storage on logout
   const onLogout = () => {
+    localStorage.removeItem("user");
     setUser(null);
     setIsAuthenticated(false);
     setLoading(false);
   };
 
- const  onLoginWithUsernameAndPassword = async (username , password) => {
-     setLoading(true);
-     try{
+  // Login with username & password
+  const onLoginWithUsernameAndPassword = async (username, password) => {
+    setLoading(true);
+    try {
       const user = await onLoginWithCredentials(username, password);
-    setUser(user);
-    setIsAuthenticated(true);
-    setLoading(false);
-     }catch(e){
-      setLoading(false);
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser(user);
+      setIsAuthenticated(true);
+    } catch (e) {
       setError(e);
       console.log("Failed to login", e);
-     }
-     
-    
-
+    }
+    setLoading(false);
   };
+
   return (
     <AuthContext.Provider
       value={{
@@ -45,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         error,
         onLogin,
         onLogout,
-        onLoginWithUsernameAndPassword
+        onLoginWithUsernameAndPassword,
       }}
     >
       {children}

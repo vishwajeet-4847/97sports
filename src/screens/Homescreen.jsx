@@ -34,6 +34,7 @@ export const Homescreen = () => {
           "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
           "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
         ]}
+        className={"lg:hidden"}
       />
       <HorizontalScrollList
         setSearchBar={setSearchBar}
@@ -43,11 +44,21 @@ export const Homescreen = () => {
         onMenuItemClick={getMatchListById}
         setCurrentSportEid={setCurrentSportEid} //
       />
+      <div className="max-w-lg m-auto">
+      <ImageCarousel
+        images={[
+          "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
+          "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",
+        ]}
+        className={"hidden lg:block"}
+      />
 
       <MatchList matchList={matchList} isCountryHeader={isCountryHeader} />
 
       <CasinoBox />
+
       <Footer />
+      </div>
     </div>
   );
 };

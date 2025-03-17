@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ImageCarousel = ({ images }) => {
+const ImageCarousel = ({ images , className }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   let touchStartX = 0;
   let touchEndX = 0;
@@ -40,7 +40,7 @@ const ImageCarousel = ({ images }) => {
 
   return (
     <div
-      className="relative w-full  overflow-hidden"
+      className={`relative ${className} w-full  m-auto  overflow-hidden`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

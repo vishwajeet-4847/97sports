@@ -6,8 +6,8 @@ const LiveStreaming = ({ url }) => {
     <iframe
       src={url}
       allowFullScreen
-      className="absolute top-0 left-0 w-full h-full border-none custom-scrollbar"
-      style={{ overflow: "hidden" , objectFit:"cover" }}
+      className="absolute top-0 left-0 w-full h-full border-none custom-scrollbar object-cover"
+     
     ></iframe>
   </div>
   );

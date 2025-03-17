@@ -34,7 +34,7 @@ const MatchRow = ({ match  , noPins}) => {
             BM
           </span>
         )}
-        {match.s && (
+        {match.tv && (
           <span className="font-bold italic px-[5px] rounded-[4px] text-[12px] text-white bg-gradient-to-b from-[#f26d1c] to-[#d14100]">
             S
           </span>

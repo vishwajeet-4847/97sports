@@ -18,6 +18,7 @@ import SportsScreen from "./screens/SportsScreen.jsx";
 import { AuthProvider } from "./services/auth/auth.context.jsx";
 import ProtectedRoute from "./screens/ProtectedRoute.jsx";
 import CasinoBox from "./components/casino/CasinoBox.jsx";
+import CasinoScreen from "./screens/CasinoScreen.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -31,6 +32,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/sports" element={<SportsScreen />} />
                 <Route path="/in-play" element={<InPlayScreen />} />
                 <Route path="/game" element={<EndedGameDetailsScreen />} />
+                <Route path="/casino" element={<CasinoScreen />} />
                 <Route path="/fullgame/:id" element={<Fullgame />} />
 
                 {/* Protected Routes */}

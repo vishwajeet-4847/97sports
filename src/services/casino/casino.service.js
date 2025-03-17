@@ -14,14 +14,16 @@ export const getAllCasinoGame = async () => {
 };
 
 
-// export const getCasinoGameById = async (id) => {
-//     try {
-//         const response = await axios.get(`https://titan97.live/get-allcasino/${id}`);
-//         return response.data;
-//     } catch (error) {
-//         console.error("Failed to fetch casino game by ID:", error.response?.data || error.message);
-//         return error.response?.data || error.message;
-//     }
 
-// }
+
+export const getCasinoGameDetailsById = async (id) => {
+    try {
+        const response = await axios.get(`https://titan97.live/get-allcasino/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to fetch casino game by ID:", error.response?.data || error.message);
+        return error.response?.data || error.message;
+    }
+
+}
 

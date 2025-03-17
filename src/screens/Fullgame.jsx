@@ -100,7 +100,7 @@ const Fullgame = () => {
 
         console.log(response.data);
         const filteredData = response.data.data.filter((data) =>
-          ["MATCH_ODDS", "Bookmaker", "Tried Match"].includes(data.mname)
+          ["MATCH_ODDS", "Bookmaker", "TIED_MATCH"].includes(data.mname)
         );
         setApiData(filteredData);
       } catch (error) {

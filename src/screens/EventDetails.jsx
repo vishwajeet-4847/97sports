@@ -2,6 +2,7 @@ import { useEffect, useState, useContext, useRef } from "react";
 import { useParams } from "react-router";
 import { CasinoContext } from "../services/casino/casino.context";
 import LiveStreaming from "../components/LiveStreaming";
+import Cards from "../components/Cards";
 
 export const EventDetails = () => {
   const { id: gmid } = useParams();
@@ -43,21 +44,9 @@ export const EventDetails = () => {
     fetchGameDetails();
   }, [gmid]); // Only gmid in the dependency array
 
-  // Timer effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 1) {
-          setSuspended(true);
-          return 30; // Reset to 30 seconds
-        }
-        setSuspended(false);
-        return prev - 1;
-      });
-    }, 1000);
+ 
 
-    return () => clearInterval(timer); // Cleanup interval on component unmount
-  }, []); // Empty dependency array is fine for this standalone timer
+  
 
   // Show loading if game is not yet fetched
   if (loading) {
@@ -85,21 +74,17 @@ export const EventDetails = () => {
         <div className="absolute inset-0 flex p-2 text-white z-30">
           {/* Players' Cards (Left) */}
           <div className="flex flex-col gap-2 p-2 rounded-md">
-            {game.card && game.card.split(",").map((player, index) => (
-              <div key={index} className="mb-2">
-                <div className="text-xs mb-1">PLAYER {player.id}</div>
-                <div className="flex gap-1">
-                  {player.cards && player.cards.map((card, cardIndex) => (
-                    <div
-                      key={cardIndex}
-                      className="w-8 h-12 bg-red-500 rounded text-center p-1 border border-white"
-                    >
-                      {card}
-                    </div>
+          <div className="text-xs mb-1">PLAYER {game.nat}</div>
+          <div className="flex items-center mb-2 gap-0.5">
+            {game.card && game.card.split(",").map((card, index) => (
+           
+             
+                
+                   <Cards key={index} cardType={card}/>
                   ))}
-                </div>
-              </div>
-            ))}
+             
+             </div>
+         
           </div>
 
           {/* Game ID & Timer (Top Right) */}

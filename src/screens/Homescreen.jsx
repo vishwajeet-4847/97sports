@@ -15,24 +15,20 @@ import TextTicker from "../components/TextTicker";
 
 export const Homescreen = () => {
   const [searchBar, setSearchBar] = useState(false);
-  const [currentSportEid, setCurrentSportEid] = useState(4);
 
  
+
+  const [currentSportEid, setCurrentSportEid] = useState(4);
   const { isAuthenticated } = useContext(AuthContext);
 
   const isCountryHeader = currentSportEid === 10 || currentSportEid === 65;
 
   const { allSports, getMatchListById, matchList } = useContext(SportsContext);
 
-
   return (
     <div>
       {searchBar && <SearchBar setSearchBar={setSearchBar} />}
-      {
-        isAuthenticated && (
-          <TextTicker />
-        )
-      }
+      {isAuthenticated && <TextTicker />}
       <ImageCarousel
         images={[
           "https://97sports.in/api/users/images/slider-default-2025221103413148.jpg",

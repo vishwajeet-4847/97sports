@@ -14,7 +14,6 @@ export const EventDetails = () => {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- 
 
   // Update ref when context function changes
   useEffect(() => {
@@ -26,7 +25,7 @@ export const EventDetails = () => {
     const fetchGameDetails = async () => {
       try {
         setLoading(true);
-        
+
         const fetchedGame = await getCasinoDetailsRef.current(gmid);
         if (fetchedGame) {
           setGame(fetchedGame);
@@ -38,17 +37,11 @@ export const EventDetails = () => {
         setError("Failed to load game details");
       } finally {
         setLoading(false);
-
-
       }
     };
 
     fetchGameDetails();
   }, [gmid]); // Only gmid in the dependency array
-
- 
-
-  
 
   // Show loading if game is not yet fetched
   if (loading) {
@@ -65,12 +58,12 @@ export const EventDetails = () => {
     return <div className="text-white">No game data available</div>;
   }
   console.log(game);
-  
+
   return (
     <div className="flex flex-col w-full  bg-grey text-white  pb-[100px] mb-[60px]">
-          {
-            game.gtype.includes("teen") && <TeenPaatiScreen  game={game}  gmid={gmid}/>
-          }
+      {game?.gtype?.includes("teen") && (
+        <TeenPaatiScreen game={game} gmid={gmid} />
+      )}
     </div>
   );
 };

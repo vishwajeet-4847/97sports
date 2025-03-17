@@ -46,14 +46,10 @@ export const AuthProvider = ({ children }) => {
     } catch (e) {
       setLoading(false);
       setError(e);
-      //("Failed to login", e);
-    }
+
       localStorage.setItem("user", JSON.stringify(user));
       setUser(user);
       setIsAuthenticated(true);
-    } catch (e) {
-      setError(e);
-      console.log("Failed to login", e);
     }
     setLoading(false);
   };

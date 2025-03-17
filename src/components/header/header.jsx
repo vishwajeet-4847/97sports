@@ -70,7 +70,7 @@ const Header = () => {
       <LoginModal
         isOpen={showLoginModal}
         onClose={() => {
-          showLoginModal(false);
+          setShowLoginModal(false);
         }}
       />
     </div>

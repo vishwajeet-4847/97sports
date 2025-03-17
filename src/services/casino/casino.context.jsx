@@ -1,11 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
-import { getAllCasinoGame , getCasinoGameDetailsById } from "./casino.service.js";
+import { getAllCasinoGame, getCasinoGameDetailsById, getCasinoResult } from "./casino.service.js";
 
 export const CasinoContext = createContext();
 
 const CasinoProvider = ({ children }) => {
   const [allCasinoGames, setAllCasinoGames] = useState([]);
-  
+  const [casinoResult, setCasinoResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -42,10 +42,34 @@ const CasinoProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  const fetchCasinoResult = async (type, mid) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await getCasinoResult(type, mid);
+      setCasinoResult(result);
+      return result;
+    } catch (err) {
+      setError(err.message || "Failed to fetch casino result");
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <CasinoContext.Provider
-      value={{ allCasinoGames, loading, error, getCasinoById , getCasinoDetails }}
+      value={{
+        allCasinoGames,
+        casinoResult,
+        loading,
+        error,
+        getCasinoById,
+        getCasinoDetails,
+        fetchCasinoResult,
+      }}
     >
       {children}
     </CasinoContext.Provider>

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import LiveStreaming from '../components/LiveStreaming'
 
 import PlayerCards from '../components/PlayerCards'
 import { splitTeenCards } from '../services/transformers/splitCard'
 import { transformDataTeenPatti } from '../services/transformers/subtypeTeenPatiCategory'
 import TeenPatiRecord from '../components/TeenPatiRecord'
+import { CasinoContext } from '../services/casino/casino.context'
 const TeenPaatiScreen = ({game , gmid}) => {
+    const [winner , setWinner] = useState(null);
+    const {loading , fetchCasinoResult} = useContext(CasinoContext);
     if (!game) {
         return <div>Loading...</div>
         
@@ -15,6 +18,10 @@ const TeenPaatiScreen = ({game , gmid}) => {
     const gameDetails = transformDataTeenPatti(game.sub);
     
     const matchCard = splitTeenCards(cardsArray) 
+    setTimeout(async () => {
+        await fetchCasinoResult(gmid,game.mid );
+        setWinner(winner);
+      }, 5 * game.ft);
  
     
     
@@ -28,6 +35,12 @@ const TeenPaatiScreen = ({game , gmid}) => {
       <div className="flex flex-col gap-2 p-2 rounded-md">
         <PlayerCards cardsDetail={matchCard} />
     </div>
+    {/* Winner (Bottom Left) */}
+    { winner && <div className="absolute bottom-2 left-2 flex flex-col gap-2 items-start">
+        <div className="text-xs bg-black px-2 py-1 rounded-md">WINNER</div>
+        <div className="text-white text-2xl font-bold px-4 py-2 rounded-md">{winner || 'Waiting for Winner'}</div>
+      </div>}
+    
 
       {/* Game ID & Timer (Top Right) */}
       <div className="absolute top-2 right-2 flex flex-col items-end gap-2">

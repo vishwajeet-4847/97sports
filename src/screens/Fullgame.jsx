@@ -8,78 +8,8 @@ const Fullgame = () => {
   const [apiData, setApiData] = useState([]);
   const tabs = ["All", "Popular", "Winner", "Bookmakers"];
 
-  const winnerData = [
-    {
-      team: "Mumbai Indians Women",
-      back: 1.83,
-      lay: 1.99,
-      backAmount: 154.27,
-      layAmount: 111.93,
-    },
-    {
-      team: "Delhi Capitals Women",
-      back: 1.97,
-      lay: 2.3,
-      backAmount: 179.15,
-      layAmount: 214.6,
-    },
-    { team: "UP Warriorz Women", back: 0, lay: 0, backAmount: 0, layAmount: 0 },
-    {
-      team: "RC Bengaluru Women",
-      back: 0,
-      lay: 0,
-      backAmount: 0,
-      layAmount: 0,
-    },
-    {
-      team: "Gujarat Giants Women",
-      back: 0,
-      lay: 0,
-      backAmount: 0,
-      layAmount: 0,
-    },
-  ];
-
-  const bookmakerData = [
-    {
-      team: "Delhi Capitals Women",
-      back: 95,
-      lay: 0,
-      backAmount: "489.7K",
-      layAmount: "500K",
-    },
-    {
-      team: "Mumbai Indians Women",
-      back: 80,
-      lay: 0,
-      backAmount: "499.5K",
-      layAmount: "500K",
-    },
-    {
-      team: "RC Bengalore Women",
-      back: 0,
-      lay: 0,
-      backAmount: "500K",
-      layAmount: "500K",
-      suspended: true,
-    },
-    {
-      team: "Gujarat Giants Women",
-      back: 140,
-      lay: 0,
-      backAmount: "488K",
-      layAmount: "500K",
-      suspended: true,
-    },
-    {
-      team: "UP Warriorz Women",
-      back: 0,
-      lay: 0,
-      backAmount: "500K",
-      layAmount: "500K",
-      suspended: true,
-    },
-  ];
+  
+ 
 
   const { id } = useParams();
   const [searchParams] = useSearchParams();

@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load user from local storage on app start
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Save user data to local storage on login
   const onLogin = () => {
     const userData = { id: 1, name: "John Doe" };
     localStorage.setItem("user", JSON.stringify(userData));
@@ -28,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-  // Clear local storage on logout
+
   const onLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
@@ -36,19 +35,30 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-  // Login with username & password
   const onLoginWithUsernameAndPassword = async (username, password) => {
     setLoading(true);
+    setError(null); 
+
     try {
-      const user = await onLoginWithCredentials(username, password);
+      const response = await onLoginWithCredentials(username, password);
+   
+      
+
+     
+      if (!response.status) {
+        throw new Error(response.message || "Invalid credentials");
+      }
+
       localStorage.setItem("user", JSON.stringify(user));
-      setUser(user);
+      setUser(response.session_token);
       setIsAuthenticated(true);
     } catch (e) {
-      setError(e);
-      console.log("Failed to login", e);
+      setError(e.message); 
+      setIsAuthenticated(false);
+      setUser(null); 
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

@@ -19,11 +19,12 @@ export const Homescreen = () => {
  
 
   const [currentSportEid, setCurrentSportEid] = useState(4);
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated , user } = useContext(AuthContext);
 
   const isCountryHeader = currentSportEid === 10 || currentSportEid === 65;
 
   const { allSports, getMatchListById, matchList } = useContext(SportsContext);
+console.log(user);
 
   return (
     <div>

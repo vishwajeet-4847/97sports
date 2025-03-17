@@ -27,3 +27,25 @@ export const getCasinoGameDetailsById = async (id) => {
 
 }
 
+export const getCasinoResult = async (type, mid) => {
+    try {
+        const formData = new URLSearchParams();
+        formData.append("type", type);
+        formData.append("mid", mid);
+
+        const response = await axios.post(
+            "https://titan97.live/get-casinorunresult",
+            formData.toString(), 
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            }
+        );
+
+        return response.data;
+    } catch (error) {
+        console.error("Failed to fetch casino result:", error.response?.data || error.message);
+        return error.response?.data || error.message;
+    }
+};

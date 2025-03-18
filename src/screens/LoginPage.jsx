@@ -7,7 +7,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login attempt with:', { username, password });
+    // console.log('Login attempt with:', { username, password });
     // Add your authentication logic here
   };
 

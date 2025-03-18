@@ -84,10 +84,9 @@ const TeenPatiRecord = ({ detail, gmid, mid }) => {
         }
       );
 
-      console.log(response.data);
       closeModal();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

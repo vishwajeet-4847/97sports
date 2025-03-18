@@ -57,7 +57,6 @@ export const EventDetails = () => {
   if (!game) {
     return <div className="text-white">No game data available</div>;
   }
-  console.log(game);
 
   return (
     <div className="flex flex-col w-full  bg-grey text-white  pb-[100px] mb-[60px]">

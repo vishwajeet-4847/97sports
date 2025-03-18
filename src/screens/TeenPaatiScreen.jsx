@@ -7,8 +7,9 @@ import { transformDataTeenPatti } from '../services/transformers/subtypeTeenPati
 import TeenPatiRecord from '../components/TeenPatiRecord'
 import { CasinoContext } from '../services/casino/casino.context'
 const TeenPaatiScreen = ({game , gmid}) => {
-    const [winner , setWinner] = useState(null);
-    const {loading , fetchCasinoResult} = useContext(CasinoContext);
+    const [winner, setWinner] = useState(null);
+   
+    const {loading , fetchCasinoResult } = useContext(CasinoContext);
     if (!game) {
         return <div>Loading...</div>
         
@@ -18,10 +19,16 @@ const TeenPaatiScreen = ({game , gmid}) => {
     const gameDetails = transformDataTeenPatti(game.sub);
     
     const matchCard = splitTeenCards(cardsArray) 
+    console.log( game.ft);
+    
     setTimeout(async () => {
-        await fetchCasinoResult(gmid,game.mid );
-        setWinner(winner);
-      }, 5 * game.ft);
+        const result = await fetchCasinoResult(gmid, game.mid); 
+        console.log(result);
+        
+        if (result) {
+          setWinner(result.winnat);  
+        }
+      }, 1000 * game.ft);
  
     
     

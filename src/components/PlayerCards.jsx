@@ -4,7 +4,7 @@ const PlayerCards = ({ cardsDetail }) => {
   return (
     <div className="mb-2">
       {cardsDetail.map(
-        ({ playerName, cards }) =>
+        ({playerName , cards }) =>
           cards?.length > 0 && (
             <div key={playerName}>
               <div className="text-xs mb-1">{playerName}</div>

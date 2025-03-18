@@ -35,8 +35,6 @@ const LoginModal = ({ isOpen, onClose }) => {
     onClose();
   };
   const handleLoginWithCredentials = () => {
-    console.log(username, password);
-
     onLoginWithUsernameAndPassword(username, password);
     if (error) {
       alert(error);

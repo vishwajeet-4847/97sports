@@ -20,8 +20,7 @@ const Fullgame = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const sid = searchParams.get("sid");
-  console.log(sid);
-  
+
   const [selectedBet, setSelectedBet] = useState(null);
   const [betAmount, setBetAmount] = useState(0);
   const betAmounts = [5, 100, 200, 300, 500, 1000, 2000, 5000];
@@ -31,6 +30,7 @@ const Fullgame = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // Store the current location
+  const [betLoading, setBetLoading] = useState(false);
 
   const [openModalSection, setOpenModalSection] = useState({
     dataIndex: null,
@@ -40,7 +40,6 @@ const Fullgame = () => {
   const { user } = useContext(AuthContext);
 
   const fetchGameDetails = async () => {
-    console.log("gmid", id, "sid", sid);
     try {
       const response = await axios.post("https://titan97.live/get-bookmaker", {
         gmid: id,
@@ -59,6 +58,7 @@ const Fullgame = () => {
       setShowAgeVerificationModal(true);
     }
     try {
+      setBetLoading(true);
       const response = await axios.post(
         "https://admin.titan97.live/Apicall/bf_placeBet_api",
         {
@@ -75,17 +75,18 @@ const Fullgame = () => {
         }
       );
 
-      console.log(response.data);
       closeModal();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+    } finally {
+      setBetLoading(false);
     }
   };
 
   useEffect(() => {
     let intervalId;
 
-    intervalId = setInterval(fetchGameDetails, 5000);
+    intervalId = setInterval(fetchGameDetails, 1000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -165,14 +166,14 @@ const Fullgame = () => {
     );
   };
 
-  console.log(apiData);
+  // console.log(apiData);
 
   if (loder) {
     return <CircularHorizontalLoader />;
   }
 
   return (
-    <div className="w-full sm:max-w-3xl max-w-fit mx-auto overflow-hidden rounded shadow relative">
+    <div className="w-full sm:max-w-3xl mx-auto overflow-hidden rounded shadow relative">
       {/* Header */}
       <div className="relative">
         <iframe
@@ -183,7 +184,7 @@ const Fullgame = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex overflow-x-scroll scroll-smooth w-fit gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
+      <div className="flex overflow-x-scroll scroll-smooth w-full gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
         {apiData?.map((tab) => (
           <button
             key={tab}
@@ -250,7 +251,9 @@ const Fullgame = () => {
                             {item?.nat}
                           </div>
 
-                          {item.gstatus !== "" && item.gstatus !== "ACTIVE" ? (
+                          {item.gstatus !== "" &&
+                          item.gstatus !== "ACTIVE" &&
+                          item.gstatus !== "OPEN" ? (
                             <div className="text-black font-semibold flex items-center justify-center w-1/2  bg-red-500/30">
                               {item.gstatus}
                             </div>
@@ -417,11 +420,12 @@ const Fullgame = () => {
                                   Cancel
                                 </button>
                                 <button
+                                  disabled={betLoading}
                                   onClick={() => placeBat()}
                                   className="w-1/2 py-2 text-center text-sm text-white rounded font-medium"
                                   style={{ backgroundColor: "#4a6da7" }}
                                 >
-                                  Place Bet
+                                  {betLoading ? "loading" : "Place Bet"}
                                 </button>
                               </div>
                             </div>

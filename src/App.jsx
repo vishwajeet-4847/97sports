@@ -9,7 +9,6 @@ import Header from "./components/header/header";
 
 function App() {
   const { isAuthenticated, user } = useContext(AuthContext);
-  console.log(isAuthenticated);
 
   return (
     <>

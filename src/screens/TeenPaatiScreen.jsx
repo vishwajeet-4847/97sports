@@ -18,11 +18,11 @@ const TeenPaatiScreen = ({game , gmid}) => {
     const gameDetails = transformDataTeenPatti(game.sub);
     
     const matchCard = splitTeenCards(cardsArray) 
-    console.log( game.ft);
+    // console.log( game.ft);
     
     setTimeout(async () => {
         const result = await fetchCasinoResult(gmid, game.mid); 
-        console.log(result);
+        // console.log(result);
         
         if (result) {
           setWinner(result.winnat);  

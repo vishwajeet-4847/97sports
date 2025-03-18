@@ -331,95 +331,98 @@ const Fullgame = () => {
                         {/* Inline Betting Modal */}
                         {isModalOpen(dataIndex, sectionIndex) &&
                           selectedBet && (
-                            <div className="w-full text-lg bg-gray-100 p-2">
-                              <div
-                                className={`p-2 text-white ${
-                                  selectedBet.type === "Back"
-                                    ? "bg-[#72bbef]"
-                                    : "bg-[#faa9ba]"
-                                } flex justify-between items-center`}
-                              >
-                                <span>{selectedBet.team}</span>
-                                <div className="flex items-center">
-                                  <div className="font-bold text-lg">
-                                    {selectedBet.odds}
-                                  </div>
+                            <div className="w-full bg-[#d3edd0] text-lg text-black rounded-md shadow-lg border border-[#beddf4] p-1">
+                              <div className="flex justify-between gap-1 items-center mb-2">
+                                <div
+                                  className="flex w-1/2 border-1 border-[#aaaaaa] items-center rounded-md"
+                                  style={{ backgroundColor: "#fcfcfc" }}
+                                >
                                   <button
-                                    onClick={closeModal}
-                                    className="ml-2 text-white"
-                                  >
-                                    <svg
-                                      className="w-5 h-5"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      viewBox="0 0 24 24"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                              </div>
-
-                              <div className="p-4 bg-white">
-                                <div className="flex items-center justify-between mb-4">
-                                  <button
-                                    onClick={() =>
-                                      setBetAmount(Math.max(0, betAmount - 1))
-                                    }
-                                    className="bg-gray-200 p-2 rounded-l-lg"
+                                    // onClick={() =>
+                                    //   setBetAmount(
+                                    //     Math.max(0, betAmount - 0.01)
+                                    //   )
+                                    // }
+                                    className="p-2 text-blue-800"
                                   >
                                     <span className="text-xl font-bold">−</span>
                                   </button>
                                   <input
-                                    type="number"
-                                    value={betAmount}
-                                    onChange={(e) =>
-                                      setBetAmount(Number(e.target.value))
-                                    }
-                                    className="p-2 text-center w-full mx-1 border rounded"
+                                    type="text"
+                                    value={selectedBet.odds}
+                                    className="p-2 text-center w-full border-r border-l border-[#aaaaaa] bg-gray-100"
+                                    readOnly
                                   />
                                   <button
-                                    onClick={() => setBetAmount(betAmount + 1)}
-                                    className="bg-gray-200 p-2 rounded-r-lg"
+                                    // onClick={() =>
+                                    //   setBetAmount(betAmount + 0.01)
+                                    // }
+                                    className="p-2 text-blue-800"
                                   >
                                     <span className="text-xl font-bold">+</span>
                                   </button>
                                 </div>
-
-                                <div className="grid grid-cols-4 gap-2 mb-4">
-                                  {betAmounts.map((amount) => (
-                                    <button
-                                      key={amount}
-                                      onClick={() =>
-                                        handleBetAmountChange(amount)
-                                      }
-                                      className="bg-gray-100 py-2 text-center rounded border"
-                                    >
-                                      {amount}
-                                    </button>
-                                  ))}
-                                </div>
-
-                                <div className="flex space-x-2">
+                                <div
+                                  className="flex border-1 border-[#aaaaaa] items-center w-1/2 rounded-md"
+                                  style={{ backgroundColor: "#fcfcfc" }}
+                                >
                                   <button
-                                    onClick={closeModal}
-                                    className="w-1/2 py-3 text-center rounded border border-gray-300"
+                                    onClick={() =>
+                                      setBetAmount(Math.max(0, betAmount - 100))
+                                    }
+                                    className="p-2 text-blue-800"
                                   >
-                                    Cancel
+                                    <span className="text-sm font-bold">−</span>
                                   </button>
+                                  <input
+                                    type="text"
+                                    value={betAmount}
+                                    onChange={(e) =>
+                                      setBetAmount(Number(e.target.value))
+                                    }
+                                    className="p-2 text-center border-l border-[#aaaaaa] w-full border-r bg-gray-100"
+                                  />
                                   <button
-                                    onClick={() => placeBat()}
-                                    className="w-1/2 py-3 text-center text-white rounded bg-blue-600"
+                                    onClick={() =>
+                                      setBetAmount(betAmount + 100)
+                                    }
+                                    className="p-2 text-blue-800 rounded-xl"
                                   >
-                                    Place Bet
+                                    <span className="text-xl font-bold">+</span>
                                   </button>
                                 </div>
+                              </div>
+
+                              {/* <div className="w-full h-[2px] bg-[#7dbbe9]"></div> */}
+
+                              <div className="grid grid-cols-4 mt-2 gap-2 mb-2">
+                                {betAmounts.map((amount) => (
+                                  <button
+                                    key={amount}
+                                    onClick={() =>
+                                      handleBetAmountChange(amount)
+                                    }
+                                    className="bg-white border-1 border-black py-1 text-center rounded hover:bg-gray-100 text-sm"
+                                  >
+                                    {amount}
+                                  </button>
+                                ))}
+                              </div>
+
+                              <div className="flex space-x-2 mt-4">
+                                <button
+                                  onClick={closeModal}
+                                  className="w-1/2 py-2 text-center rounded border border-green-300 text-sm bg-white hover:bg-gray-100"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  onClick={() => placeBat()}
+                                  className="w-1/2 py-2 text-center text-sm text-white rounded font-medium"
+                                  style={{ backgroundColor: "#4a6da7" }}
+                                >
+                                  Place Bet
+                                </button>
                               </div>
                             </div>
                           )}

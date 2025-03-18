@@ -8,10 +8,12 @@ import HeaderBlue from "./components/Roshan/Profile/HeaderBlue";
 import Header from "./components/header/header";
 
 function App() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, user } = useContext(AuthContext);
+  console.log(isAuthenticated);
+
   return (
     <>
-      {isAuthenticated ? <HeaderBlue /> : <Header />}
+      {isAuthenticated && user ? <HeaderBlue /> : <Header />}
 
       <Outlet />
       <BottomNavigationBar />

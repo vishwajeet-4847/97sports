@@ -1,7 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router";
 import CircularHorizontalLoader from "../components/loader";
+import { AuthContext } from "../services/auth/auth.context";
+import AgeVerificationModal from "../components/modals/AgeVerificationModal";
+import LoginModal from "../components/modals/LoginModal";
 
 const Fullgame = () => {
   const [activeTab, setActiveTab] = useState("Winner");
@@ -16,25 +24,61 @@ const Fullgame = () => {
   
   const [selectedBet, setSelectedBet] = useState(null);
   const [betAmount, setBetAmount] = useState(0);
-  const betAmounts = [5, 200, 300, 400, 500, 1000, 2000, 5000];
+  const betAmounts = [5, 100, 200, 300, 500, 1000, 2000, 5000];
   // Track which row has an open modal
+  const [showAgeVerificationModal, setShowAgeVerificationModal] =
+    useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation(); // Store the current location
+
   const [openModalSection, setOpenModalSection] = useState({
     dataIndex: null,
     sectionIndex: null,
   });
 
+  const { user } = useContext(AuthContext);
+
   const fetchGameDetails = async () => {
+    console.log("gmid", id, "sid", sid);
     try {
       const response = await axios.post("https://titan97.live/get-bookmaker", {
         gmid: id,
         sid: sid,
       });
-
       setApiData(response.data.data);
     } catch (error) {
       console.error(error);
     } finally {
       setLoader(false);
+    }
+  };
+
+  const placeBat = async () => {
+    if (!user) {
+      setShowAgeVerificationModal(true);
+    }
+    try {
+      const response = await axios.post(
+        "https://admin.titan97.live/Apicall/bf_placeBet_api",
+        {
+          selection_id: selectedBet?.mid,
+          bet_type: selectedBet?.type,
+          user_id: user?.user_id,
+          bet_name: selectedBet?.team,
+          betvalue: selectedBet?.odds,
+          match_id: selectedBet?.gmid,
+          market_type: selectedBet?.type,
+          win_amount: selectedBet?.odds * betAmount,
+          loss_amount: betAmount,
+          gtype: selectedBet?.mname,
+        }
+      );
+
+      console.log(response.data);
+      closeModal();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -54,23 +98,46 @@ const Fullgame = () => {
     fetchData();
   }, []);
 
-  const handleBackClick = (dataIndex, sectionIndex, item, odds) => {
+  const handleBackClick = (
+    dataIndex,
+    sectionIndex,
+    item,
+    odds,
+    mname,
+    gmid,
+    mid
+  ) => {
     setSelectedBet({
       team: item.nat,
       odds: odds,
       type: "Back",
+      mname,
+      gmid,
+      mid,
     });
+
     setOpenModalSection({
       dataIndex: dataIndex,
       sectionIndex: sectionIndex,
     });
   };
 
-  const handleLayClick = (dataIndex, sectionIndex, item, odds) => {
+  const handleLayClick = (
+    dataIndex,
+    sectionIndex,
+    item,
+    odds,
+    mname,
+    gmid,
+    mid
+  ) => {
     setSelectedBet({
       team: item.nat,
       odds: odds,
       type: "Lay",
+      mname,
+      gmid,
+      mid,
     });
     setOpenModalSection({
       dataIndex: dataIndex,
@@ -80,10 +147,6 @@ const Fullgame = () => {
 
   const handleBetAmountChange = (amount) => {
     setBetAmount(amount);
-  };
-
-  const handlePlaceBet = () => {
-    closeModal();
   };
 
   const closeModal = () => {
@@ -102,12 +165,14 @@ const Fullgame = () => {
     );
   };
 
+  console.log(apiData);
+
   if (loder) {
     return <CircularHorizontalLoader />;
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto overflow-hidden rounded shadow relative">
+    <div className="w-full sm:max-w-3xl max-w-fit mx-auto overflow-hidden rounded shadow relative">
       {/* Header */}
       <div className="relative">
         <iframe
@@ -118,11 +183,11 @@ const Fullgame = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex overflow-x-scroll scroll-smooth w-full gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
+      <div className="flex overflow-x-scroll scroll-smooth w-fit gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
         {apiData?.map((tab) => (
           <button
             key={tab}
-            className={`p-2 font-bold border-1 border-black rounded-4xl text-sm ${
+            className={`p-2 font-bold border-1 text-nowrap border-black rounded-4xl text-sm ${
               activeTab === tab?.mname
                 ? "bg-[#016630] text-white"
                 : "bg-[#2c485a]"
@@ -197,7 +262,10 @@ const Fullgame = () => {
                                     dataIndex,
                                     sectionIndex,
                                     item,
-                                    item.odds[0]?.odds
+                                    item.odds[0]?.odds,
+                                    data.mname,
+                                    data.gmid,
+                                    data.mid
                                   )
                                 }
                                 className="w-full bg-transparent"
@@ -215,7 +283,8 @@ const Fullgame = () => {
                                     dataIndex,
                                     sectionIndex,
                                     item,
-                                    item.odds[0]?.odds
+                                    item.odds[0]?.odds,
+                                    data.mname
                                   )
                                 }
                                 className="w-full bg-transparent"
@@ -345,7 +414,7 @@ const Fullgame = () => {
                                     Cancel
                                   </button>
                                   <button
-                                    onClick={handlePlaceBet}
+                                    onClick={() => placeBat()}
                                     className="w-1/2 py-3 text-center text-white rounded bg-blue-600"
                                   >
                                     Place Bet
@@ -368,6 +437,23 @@ const Fullgame = () => {
             </div>
           ))
         : null}
+
+      <AgeVerificationModal
+        isOpen={showAgeVerificationModal}
+        onConfirm={() => {
+          setShowLoginModal(true);
+          setShowAgeVerificationModal(false);
+        }}
+        onClose={() => {
+          setShowAgeVerificationModal(false);
+          setShowLoginModal(false);
+          navigate(location.pathname, { replace: true });
+        }}
+      />
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </div>
   );
 };

@@ -20,6 +20,7 @@ import ProtectedRoute from "./screens/ProtectedRoute.jsx";
 import CasinoBox from "./components/casino/CasinoBox.jsx";
 import CasinoScreen from "./screens/CasinoScreen.jsx";
 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
@@ -34,6 +35,8 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/game" element={<EndedGameDetailsScreen />} />
                 <Route path="/casino" element={<CasinoScreen />} />
                 <Route path="/fullgame/:id" element={<Fullgame />} />
+          
+
 
                 {/* Protected Routes */}
                 <Route element={<ProtectedRoute />}>

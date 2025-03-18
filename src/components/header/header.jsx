@@ -25,7 +25,7 @@ const Header = () => {
           />
         </div>
 
-        <div className="flex items-center space-x-4 hidden md:flex">
+        <div className=" items-center space-x-4 hidden md:flex">
           <FaSearch
             className="h-5 w-5 text-lg  text-white"
             onClick={() => {

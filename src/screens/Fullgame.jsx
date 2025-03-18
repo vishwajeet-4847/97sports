@@ -20,6 +20,8 @@ const Fullgame = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const sid = searchParams.get("sid");
+  console.log(sid);
+  
   const [selectedBet, setSelectedBet] = useState(null);
   const [betAmount, setBetAmount] = useState(0);
   const betAmounts = [5, 100, 200, 300, 500, 1000, 2000, 5000];

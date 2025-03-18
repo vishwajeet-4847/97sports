@@ -1,26 +1,34 @@
 import React, { useContext, useState } from "react";
 import LiveStreaming from "../components/LiveStreaming";
+import PlayerCards from '../components/PlayerCards'
+import { splitTeenCards } from '../services/transformers/splitCard'
+import { transformDataTeenPatti } from '../services/transformers/subtypeTeenPatiCategory'
+import TeenPatiRecord from '../components/TeenPatiRecord'
+import { CasinoContext } from '../services/casino/casino.context'
+const TeenPaatiScreen = ({game , gmid}) => {
+    const [winner, setWinner] = useState(null);
+   
+    const {loading , fetchCasinoResult } = useContext(CasinoContext);
+    if (!game) {
+        return <div>Loading...</div>
+        
+    }
 
-import PlayerCards from "../components/PlayerCards";
-import { splitTeenCards } from "../services/transformers/splitCard";
-import { transformDataTeenPatti } from "../services/transformers/subtypeTeenPatiCategory";
-import TeenPatiRecord from "../components/TeenPatiRecord";
-import { CasinoContext } from "../services/casino/casino.context";
-const TeenPaatiScreen = ({ game, gmid }) => {
-  const [winner, setWinner] = useState(null);
-  const { loading, fetchCasinoResult } = useContext(CasinoContext);
-  if (!game) {
-    return <div>Loading...</div>;
-  }
-
-  let cardsArray = game.card.split(",");
-  const gameDetails = transformDataTeenPatti(game.sub);
-
-  const matchCard = splitTeenCards(cardsArray);
-  setTimeout(async () => {
-    await fetchCasinoResult(gmid, game.mid);
-    setWinner(winner);
-  }, 5 * game.ft);
+    let cardsArray = game.card.split(",")
+    const gameDetails = transformDataTeenPatti(game.sub);
+    
+    const matchCard = splitTeenCards(cardsArray) 
+    console.log( game.ft);
+    
+    setTimeout(async () => {
+        const result = await fetchCasinoResult(gmid, game.mid); 
+        console.log(result);
+        
+        if (result) {
+          setWinner(result.winnat);  
+        }
+      }, 1000 * game.ft);
+ 
 
   return (
     <div className="relative w-full h-[200px] bg-black ">

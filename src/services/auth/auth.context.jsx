@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -20,13 +19,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const onLogin = () => {
-    const userData = { id: 1, name: "John Doe" };
+    const userData = {
+      user_id: 2,
+    };
     localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
     setIsAuthenticated(true);
     setLoading(false);
   };
-
 
   const onLogout = () => {
     localStorage.removeItem("user");
@@ -36,26 +36,22 @@ export const AuthProvider = ({ children }) => {
   };
   const onLoginWithUsernameAndPassword = async (username, password) => {
     setLoading(true);
-    setError(null); 
+    setError(null);
 
     try {
       const response = await onLoginWithCredentials(username, password);
-   
-      
-
-     
       if (!response.status) {
         throw new Error(response.message || "Invalid credentials");
       }
 
       localStorage.setItem("user", JSON.stringify(user));
-      setUser(response.session_token);
+      setUser(response);
       setIsAuthenticated(true);
       setLoading(false);
     } catch (e) {
-      setError(e.message); 
+      setError(e.message);
       setIsAuthenticated(false);
-      setUser(null); 
+      setUser(null);
     } finally {
       setLoading(false);
     }

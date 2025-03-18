@@ -2,60 +2,64 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../services/auth/auth.context";
 import { useLocation, useNavigate } from "react-router";
 
-
 const LoginModal = ({ isOpen, onClose }) => {
-  const { onLogin , onLoginWithUsernameAndPassword , error , loading } = useContext(AuthContext);
+  const { onLogin, onLoginWithUsernameAndPassword, error, loading } =
+    useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  
   // Handle ESC key to close modal
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
-    
+
     if (isOpen) {
-      window.addEventListener('keydown', handleEsc);
+      window.addEventListener("keydown", handleEsc);
       // Prevent background scrolling
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     }
-    
+
     return () => {
-      window.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'auto';
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "auto";
     };
   }, [isOpen, onClose]);
 
-  const handleLoginWithDemo=()=>{
+  const handleLoginWithDemo = () => {
     onLogin();
     navigate(location.pathname, { replace: true });
     onClose();
-  }
-  const handleLoginWithCredentials=(username , password)=>{
+  };
+  const handleLoginWithCredentials = () => {
+    console.log(username, password);
+
     onLoginWithUsernameAndPassword(username, password);
-    if(error){
+    if (error) {
       alert(error);
-      navigate("/",{replace:true});
+      navigate("/", { replace: true });
       return;
     }
-      navigate(location.pathname, { replace: true });
-      onClose();
-  }
-  
+    navigate(location.pathname, { replace: true });
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 w-full h-full z-50 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="fixed inset-0 w-full h-full bg-gradient-to-b from-red-600 to-red-800 flex flex-col items-center justify-center pt-16 animate-fadeIn">
         {/* Close button */}
-        <div onClick={onClose} className="absolute top-4 right-4 cursor-pointer hover:opacity-80">
+        <div
+          onClick={onClose}
+          className="absolute top-4 right-4 cursor-pointer hover:opacity-80"
+        >
           <span className="text-white text-2xl font-bold">✕</span>
         </div>
-        
+
         {/* Logo */}
         <div className="mb-16">
           <div className="flex">
@@ -69,7 +73,7 @@ const LoginModal = ({ isOpen, onClose }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Login Form */}
         <div className="w-full max-w-md px-8 space-y-4">
           {/* Username Field */}
@@ -98,7 +102,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               </svg>
             </div>
           </div>
-          
+
           {/* Password Field */}
           <div className="relative">
             <input
@@ -125,16 +129,20 @@ const LoginModal = ({ isOpen, onClose }) => {
               </svg>
             </div>
           </div>
-          
+
           {/* Login Button */}
-          <button onClick={
-            handleLoginWithCredentials
-          } className="w-full bg-red-700 text-white p-2 rounded-md font-medium shadow-md hover:bg-red-800 transition">
+          <button
+            onClick={handleLoginWithCredentials}
+            className="w-full bg-red-700 text-white p-2 rounded-md font-medium shadow-md hover:bg-red-800 transition"
+          >
             Login
           </button>
-          
+
           {/* Demo Login Button */}
-          <button onClick={handleLoginWithDemo} className="w-full bg-red-800 text-white p-2 rounded-md font-medium shadow-md hover:bg-red-900 transition">
+          <button
+            onClick={handleLoginWithDemo}
+            className="w-full bg-red-800 text-white p-2 rounded-md font-medium shadow-md hover:bg-red-900 transition"
+          >
             Login with Demo ID
           </button>
         </div>

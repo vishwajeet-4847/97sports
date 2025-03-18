@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router";
 import CircularHorizontalLoader from "../components/loader";
+import { AuthContext } from "../services/auth/auth.context";
 
 const Fullgame = () => {
   const [activeTab, setActiveTab] = useState("Winner");
@@ -16,10 +17,14 @@ const Fullgame = () => {
   const [betAmount, setBetAmount] = useState(0);
   const betAmounts = [5, 200, 300, 400, 500, 1000, 2000, 5000];
   // Track which row has an open modal
+
   const [openModalSection, setOpenModalSection] = useState({
     dataIndex: null,
     sectionIndex: null,
   });
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   const fetchGameDetails = async () => {
     try {
@@ -104,8 +109,16 @@ const Fullgame = () => {
     return <CircularHorizontalLoader />;
   }
 
+  // const fetchd = async () => {
+  //   const response = await axios.get(
+  //     `https://titan97.live/get-livesports?gmid=${id}&sid=${sid}`
+  //   );
+  //   console.log(response);
+  // };
+
+  // fetchd();
   return (
-    <div className="w-full max-w-3xl mx-auto overflow-hidden rounded shadow relative">
+    <div className="w-full sm:max-w-3xl max-w-fit mx-auto overflow-hidden rounded shadow relative">
       {/* Header */}
       <div className="relative">
         <iframe
@@ -116,11 +129,11 @@ const Fullgame = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex overflow-x-scroll scroll-smooth w-full gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
+      <div className="flex overflow-x-scroll scroll-smooth w-fit gap-1 p-2 text-white bg-gray-200 border-b border-gray-300">
         {apiData?.map((tab) => (
           <button
             key={tab}
-            className={`p-2 font-bold border-1 border-black rounded-4xl text-sm ${
+            className={`p-2 font-bold border-1 text-nowrap border-black rounded-4xl text-sm ${
               activeTab === tab?.mname
                 ? "bg-[#016630] text-white"
                 : "bg-[#2c485a]"
